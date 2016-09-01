@@ -1,10 +1,14 @@
 package server;
 
-public class Main {
+public final class Main {
 
-  public static void main( String [ ] args ) {
-    // TODO Auto-generated method stub
-    System.out.println( "Hello World" );
+  private Main( ) {
+    
   }
-
+  
+  public static void main( String [ ] args ) {
+    
+    System.out.println( "Server on" );
+    new Server ();
+  }
 }
