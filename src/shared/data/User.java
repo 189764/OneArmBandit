@@ -1,4 +1,4 @@
-package client;
+package shared.data;
 
 public class User implements Comparable<User> {
 
