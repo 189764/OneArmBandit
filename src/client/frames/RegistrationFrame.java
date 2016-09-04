@@ -11,11 +11,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 
-public class registrationFrame extends JFrame {
+public class RegistrationFrame extends JFrame {
 	private JPasswordField passwordField;
 	private JTextField textField;
 	private JPasswordField passwordField_1;
-	public registrationFrame() {
+	public RegistrationFrame() {
 		getContentPane().setLayout(null);
 		getContentPane().setName("One Arm Bandit");
 		JButton btnRejestruj = new JButton("Rejestruj");
