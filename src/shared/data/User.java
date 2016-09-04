@@ -1,4 +1,6 @@
 package shared.data;
+import shared.data.userExceptions.OutOfRangeStakeException;;
+
 
 public class User implements Comparable<User> {
 
@@ -6,6 +8,7 @@ public class User implements Comparable<User> {
 	private String password;
 	private Integer points;
 	private boolean isAdmin;
+	private int stake;
 	
 	public User (String login, String password, Integer points, boolean isAdmin ) {
 	  this.login = login;
@@ -87,6 +90,24 @@ public class User implements Comparable<User> {
 		return flag;
 	
 	
+	}
+	
+	public void increaseStake() throws OutOfRangeStakeException {
+		if(stake == 20) {
+		throw new OutOfRangeStakeException();
+		} else {
+		stake += 1;
+		}
+		
+	}
+	
+	public void decreaseStake() throws OutOfRangeStakeException {
+		if(stake == 1) {
+			throw new OutOfRangeStakeException();
+		} else {
+		stake -= 1;
+		}
+		
 	}
 	
 	
