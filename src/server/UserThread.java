@@ -53,7 +53,25 @@ public class UserThread implements Runnable {
       replay.setInstruction( this.changePassword( data.getLogin( ), data.getPassword( ) ) );
       this.sendData( replay );
     }
+    if ( data.getInstruction( ) == Instruction.PLAY ) {
+      replay.setInstruction( this.play( data.getLogin( ) ) );
+      this.sendData( replay );
+    }
+    if ( data.getInstruction( ) == Instruction.ASK_RANKING ) {
+      replay.setInstruction( this.sendRanking( data.getLogin( ) ) );
+      this.sendData( replay );
+    }
     
+  }
+
+  private Instruction sendRanking( String login ) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  private Instruction play( String login ) {
+    // TODO Auto-generated method stub
+    return null;
   }
 
   private Instruction logIn( String login, String password ) {
@@ -64,7 +82,11 @@ public class UserThread implements Runnable {
           && Server.getUsersAll( ).get( i ).getPassword( ).equals( password ) ) {
         Server.addClientsMap( login, this.id );
         System.out.println( "User " + login + " logged" );
-        instruction = Instruction.LOG_IN_SUCCESS;
+        if ( Server.getUsersAll( ).get( i ).getIsAdmin( ) ) {
+        instruction = Instruction.LOG_IN_SUCCESS_ADMIN;
+        } else {
+          instruction = Instruction.LOG_IN_SUCCESS_USER;
+        }
         this.sendInformation( );
       }
     }

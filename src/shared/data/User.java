@@ -32,10 +32,10 @@ public class User implements Comparable<User> {
 	public void setPoints(Integer points) {
 		this.points = points;
 	}
-	public boolean isAdmin() {
+	public boolean getIsAdmin() {
 		return isAdmin;
 	}
-	public void setAdmin(boolean isAdmin) {
+	public void setIsAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
 

@@ -39,4 +39,14 @@ public class DeliverToServer {
     this.serverConnector.sendToServer( userData );
   }
   
+  public void play( String login ) {
+    Package userData = new Data( login, "", Instruction.PLAY );
+    this.serverConnector.sendToServer( userData );
+  }
+  
+  public void askRanking ( String login ) {
+    Package userData = new Data( login, "", Instruction.ASK_RANKING );
+    this.serverConnector.sendToServer( userData );
+  }
+  
 }
