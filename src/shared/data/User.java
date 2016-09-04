@@ -15,7 +15,22 @@ public class User implements Comparable<User> {
 	  this.password = password;
 	  this.points = points;
 	  this.isAdmin = isAdmin; 
+	  this.stake = 1;
 	}
+	
+	public int getStake() {
+		return stake;
+	}
+
+	public void setStake(int stake) {
+		this.stake = stake;
+	}
+
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+
+
 	
 	public String getLogin() {
 		return login;
@@ -109,6 +124,13 @@ public class User implements Comparable<User> {
 		}
 		
 	}
+
+	public void addPoints(int prize) {
+		points += prize;
+		
+	}
+
+
 	
 	
 	
