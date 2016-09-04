@@ -1,5 +1,7 @@
 package server;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import server.Bandit;
@@ -24,14 +26,33 @@ public class Bandit {
 	
 	
 	
-	public Bandit(int bank) {
+	public Bandit() {
 		super();
-		this.bank = bank;
+		bank = 0;
 		generator = new Random();
 		tab = new int[3][3];
 	}
 
-
+	public int maxSymbol() {
+		List<Integer> symbols = new ArrayList<Integer>();
+		symbols.add(symbolOne);
+		symbols.add(symbolTwo);
+		symbols.add(symbolThree);
+		symbols.add(symbolFour);
+		symbols.add(symbolFive);
+		symbols.add(symbolSix);
+		symbols.add(symbolSeven);
+		symbols.add(symbolEight);
+		symbols.add(symbolNine);
+		int max = symbolNine;
+		for(int x : symbols) {
+		 if(x > max){
+			 max = x;
+		 }
+		}
+		return max;
+	}
+	
 	public int whatPrize(int symbol) {
 		if(symbol == 1) {
 			return symbolOne;
@@ -81,7 +102,8 @@ public class Bandit {
 	public void cashOut(int prize, User user) {
 		
 		user.addPoints(prize);
-		
+		bank -= prize;
+	
 	}
 	
 	public void randomSymbols() {
@@ -96,6 +118,10 @@ public class Bandit {
 	}
 	
 	public void bet(User user) {
+		if(bank < maxSymbol()*user.getStake()){
+			throw new NotEnoughMoneyInBanditException();
+		} else {
+		
 		int prize = 0;
 		randomSymbols();
 		
@@ -120,7 +146,7 @@ public class Bandit {
 		if(prize>0){
 			cashOut(prize, user);
 		}
-		
+		}
 	}
 	
 

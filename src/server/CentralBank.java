@@ -7,6 +7,13 @@ public class CentralBank {
 
 	private int points;
 	
+	
+	
+	public CentralBank(int points) {
+		super();
+		this.points = points;
+	}
+
 	public int getPoints() {
 		return points;
 	}
@@ -23,7 +30,11 @@ public class CentralBank {
 		
 	}
 	
+	public void addPoints(int quantity) {
+		points += quantity;
+	}
 	
+
 	
 	
 }
