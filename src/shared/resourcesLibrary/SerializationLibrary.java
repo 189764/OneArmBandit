@@ -155,7 +155,7 @@ protected void loadMe( ) {
 * @return path - it returns path (String) - only dirs
 */
 
-private String createSavingPathToDirs( List<String> dirs ) {
+String createSavingPathToDirs( List<String> dirs ) {
   String path;
   String[] tab = new String[dirs.size( )];
   int i = 0;
