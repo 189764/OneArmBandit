@@ -1,4 +1,3 @@
-
 package client.frames;
 
 import javax.swing.JFrame;
@@ -11,18 +10,28 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 
-public class registrationFrame extends JFrame {
+public class RegistrationFrame extends JFrame {
 	private JPasswordField passwordField;
 	private JTextField textField;
 	private JPasswordField passwordField_1;
-	public registrationFrame() {
+  private RegistrationLogic registrationLogic;
+  private RegistrationFrame thisFrame;
+	
+	public RegistrationFrame( RegistrationLogic registrationLogic ) {
+    this.thisFrame = this;
+    this.registrationLogic = registrationLogic;
 		getContentPane().setLayout(null);
 		getContentPane().setName("One Arm Bandit");
-		JButton btnRejestruj = new JButton("Rejestruj");
+		JButton btnRejestruj = new JButton("Register");
 		btnRejestruj.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			}
-		});
+        String loginString = textField.getText( );
+        @SuppressWarnings( "deprecation" )
+        String passwordString = passwordField.getText( );
+        String passwordString1 = passwordField_1.getText( );
+        registrationLogic.register( loginString, passwordString, passwordString1 );
+      }
+    } );
 		btnRejestruj.setBounds(29, 141, 106, 29);
 		getContentPane().add(btnRejestruj);
 		
@@ -35,7 +44,12 @@ public class registrationFrame extends JFrame {
 		getContentPane().add(textField);
 		textField.setColumns(10);
 		
-		JButton btnLogowanie = new JButton("Logowanie");
+		JButton btnLogowanie = new JButton("Log in");
+		btnLogowanie.addActionListener(new ActionListener() {
+		  public void actionPerformed(ActionEvent e) {
+		    registrationLogic.logIn( );
+		  }
+		});
 		btnLogowanie.setBounds(145, 141, 107, 29);
 		getContentPane().add(btnLogowanie);
 		
@@ -54,5 +68,6 @@ public class registrationFrame extends JFrame {
 		passwordField_1 = new JPasswordField();
 		passwordField_1.setBounds(108, 101, 162, 29);
 		getContentPane().add(passwordField_1);
+		setVisible( true );
 	}
 }

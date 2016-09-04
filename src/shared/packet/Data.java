@@ -9,6 +9,7 @@ public class Data extends Package {
 
   private String login;
   private String password;
+  private boolean isAdmin;
   private Instruction instruction;
 
   public Data( String login, String password,
@@ -20,6 +21,14 @@ public class Data extends Package {
   
   public Data( ) {
     
+  }
+  
+  public boolean getIsAdmin( ) {
+    return this.isAdmin;
+  }
+  
+  public void setIsAdmin( boolean isAdmin ) {
+    this.isAdmin = isAdmin;
   }
 
   public String getLogin( ) {
