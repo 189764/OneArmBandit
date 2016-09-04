@@ -42,7 +42,8 @@ public class UserThread implements Runnable {
       this.logOut( data.getLogin( ) );
     }
     if ( data.getInstruction( ) == Instruction.REGISTER ) {
-      replay.setInstruction( this.register( data.getLogin( ), data.getPassword( ) ) );
+      replay
+        .setInstruction( this.register( data.getLogin( ), data.getPassword( ) ) );
       this.sendData( replay );
     }
     if ( data.getInstruction( ) == Instruction.RESET_PASSWORD ) {
@@ -50,7 +51,8 @@ public class UserThread implements Runnable {
       this.sendData( replay );
     }
     if ( data.getInstruction( ) == Instruction.CHANGE_PASSWORD ) {
-      replay.setInstruction( this.changePassword( data.getLogin( ), data.getPassword( ) ) );
+      replay.setInstruction(
+          this.changePassword( data.getLogin( ), data.getPassword( ) ) );
       this.sendData( replay );
     }
     if ( data.getInstruction( ) == Instruction.PLAY ) {
@@ -58,15 +60,51 @@ public class UserThread implements Runnable {
       this.sendData( replay );
     }
     if ( data.getInstruction( ) == Instruction.ASK_RANKING ) {
-      replay.setInstruction( this.sendRanking( data.getLogin( ) ) );
-      this.sendData( replay );
+      this.sendRanking( );
     }
-    
+
   }
 
-  private Instruction sendRanking( String login ) {
-    // TODO Auto-generated method stub
-    return null;
+  private void sendRanking( ) {
+    int counter = 0;
+    for ( int i = 0; i < Server.getUsersAll( ).size( ); i++ ) {
+      if ( !Server.getUsersAll( ).get( i ).getIsAdmin( ) ) {
+        counter++;
+      }
+    }
+    Object [ ] [ ] ranking = new Object [ counter ] [ 2 ];
+    boolean flag = false;
+    for ( int i = 0; i < Server.getUsersAll( ).size( ); i++ ) {
+      if ( Server.getUsersAll( ).get( i ).getIsAdmin( ) ) {
+        flag = true;
+      }
+      if ( !flag ) {
+        ranking[ i ][ 0 ] = Server.getUsersAll( ).get( i ).getLogin( );
+        ranking[ i ][ 1 ] = Server.getUsersAll( ).get( i ).getPoints( );
+      } else {
+        ranking[ i - 1 ][ 0 ] = Server.getUsersAll( ).get( i ).getLogin( );
+        ranking[ i - 1 ][ 1 ] = Server.getUsersAll( ).get( i ).getPoints( );
+      }
+    }
+    int i = 0;
+    String tempString;
+    Integer tempInt = 0;
+    while ( i < ranking.length - 1 ) {
+      if ( (Integer) ranking[ i ][ 1 ] > (Integer) ranking[ i + 1 ][ 1 ] ) {
+        tempString = (String) ranking[ i ][ 0 ];
+        tempInt = (Integer) ranking[ i ][ 1 ];
+        ranking[ i ][ 0 ] = ranking[ i + 1 ][ 0 ];
+        ranking[ i ][ 1 ] = ranking[ i + 1 ][ 1 ];
+        ranking[ i + 1 ][ 0 ] = tempString;
+        ranking[ i + 1 ][ 1 ] = tempInt;
+      }
+      i++;
+    }
+
+    Data replay = new Data( );
+    replay.setInstruction( Instruction.SEND_RANKING );
+    replay.setRanking( ranking );
+    this.sendData( replay );
   }
 
   private Instruction play( String login ) {
@@ -83,7 +121,7 @@ public class UserThread implements Runnable {
         Server.addClientsMap( login, this.id );
         System.out.println( "User " + login + " logged" );
         if ( Server.getUsersAll( ).get( i ).getIsAdmin( ) ) {
-        instruction = Instruction.LOG_IN_SUCCESS_ADMIN;
+          instruction = Instruction.LOG_IN_SUCCESS_ADMIN;
         } else {
           instruction = Instruction.LOG_IN_SUCCESS_USER;
         }
@@ -109,49 +147,49 @@ public class UserThread implements Runnable {
     Data data = new Data( );
     this.sendData( data );
   }
-  
- private Instruction register( String login, String password ) {
-    
+
+  private Instruction register( String login, String password ) {
+
     boolean exists = false;
-    for ( User x: Server.getUsersAll( ) ) {
+    for ( User x : Server.getUsersAll( ) ) {
       if ( x.getLogin( ).equals( login ) ) {
         exists = true;
-      } 
       }
+    }
     if ( exists ) {
       return Instruction.REGISTER_ERROR;
     } else {
-      Server.addUserList( new User ( login, password, 0, false ) ); 
+      Server.addUserList( new User( login, password, 0, false ) );
       System.out.println( "User " + login + " added" );
       this.resource.saveObject( Server.getUsersAll( ), "server:users" );
       return Instruction.REGISTER_SUCCES;
     }
   }
- 
- private Instruction changePassword ( String login, String newPassword ) {
-   Instruction status = Instruction.CHANGE_PASSWORD_ERROR;
-   for ( int i = 0; i < Server.getUsersAll( ).size( ); i++ ) {
-   if ( Server.getUsersAll( ).get( i ).getLogin( ).equals( login ) ) {
-     Server.getUsersAll( ).get( i ).setPassword( newPassword );
-     System.out.println( "Password for user " + login + " changed" );
-     this.resource.saveObject( Server.getUsersAll( ), "server:users" );
-     status = Instruction.CHANGE_PASSWORD_SUCCESS;
-   } 
-   }
-   return status;
- }
- 
- private Instruction resetPassword ( String login ) {
-   Instruction status = Instruction.RESET_PASSWORD_ERROR;
-   for ( int i = 0; i < Server.getUsersAll( ).size( ); i++ ) {
-   if ( Server.getUsersAll( ).get( i ).getLogin( ).equals( login ) ) {
-     Server.getUsersAll( ).get( i ).setPassword( login );
-     System.out.println( "Password for user " + login + " was reset" );
-     this.resource.saveObject( Server.getUsersAll( ), "server:users" );
-     status = Instruction.RESET_PASSWORD_SUCCESS;
-   } 
-   }
-   return status;
- }
- 
+
+  private Instruction changePassword( String login, String newPassword ) {
+    Instruction status = Instruction.CHANGE_PASSWORD_ERROR;
+    for ( int i = 0; i < Server.getUsersAll( ).size( ); i++ ) {
+      if ( Server.getUsersAll( ).get( i ).getLogin( ).equals( login ) ) {
+        Server.getUsersAll( ).get( i ).setPassword( newPassword );
+        System.out.println( "Password for user " + login + " changed" );
+        this.resource.saveObject( Server.getUsersAll( ), "server:users" );
+        status = Instruction.CHANGE_PASSWORD_SUCCESS;
+      }
+    }
+    return status;
+  }
+
+  private Instruction resetPassword( String login ) {
+    Instruction status = Instruction.RESET_PASSWORD_ERROR;
+    for ( int i = 0; i < Server.getUsersAll( ).size( ); i++ ) {
+      if ( Server.getUsersAll( ).get( i ).getLogin( ).equals( login ) ) {
+        Server.getUsersAll( ).get( i ).setPassword( login );
+        System.out.println( "Password for user " + login + " was reset" );
+        this.resource.saveObject( Server.getUsersAll( ), "server:users" );
+        status = Instruction.RESET_PASSWORD_SUCCESS;
+      }
+    }
+    return status;
+  }
+
 }

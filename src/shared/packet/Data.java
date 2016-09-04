@@ -11,6 +11,7 @@ public class Data extends Package {
   private String password;
   private boolean isAdmin;
   private Instruction instruction;
+  private Object[][] ranking;
 
   public Data( String login, String password,
       Instruction instruction ) {
@@ -21,6 +22,14 @@ public class Data extends Package {
   
   public Data( ) {
     
+  }
+  
+  public Object[][] getRanking( ) {
+    return this.ranking;
+  }
+  
+  public void setRanking( Object[][] ranking ) {
+    this.ranking = ranking;
   }
   
   public boolean getIsAdmin( ) {
