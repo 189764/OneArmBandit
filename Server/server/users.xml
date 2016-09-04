@@ -1,0 +1,8 @@
+<list>
+  <shared.data.User>
+    <login>admin</login>
+    <password>admin</password>
+    <points>0</points>
+    <isAdmin>false</isAdmin>
+  </shared.data.User>
+</list>

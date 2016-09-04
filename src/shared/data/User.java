@@ -7,6 +7,12 @@ public class User implements Comparable<User> {
 	private Integer points;
 	private boolean isAdmin;
 	
+	public User (String login, String password, Integer points, boolean isAdmin ) {
+	  this.login = login;
+	  this.password = password;
+	  this.points = points;
+	  this.isAdmin = isAdmin; 
+	}
 	
 	public String getLogin() {
 		return login;

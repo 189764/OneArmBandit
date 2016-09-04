@@ -1,5 +1,6 @@
 package client;
 
+import client.frames.LoginLogic;
 import client.networkClient.PickUpFromServer;
 import client.networkClient.ServerConnector;
 
@@ -10,6 +11,7 @@ public class Main {
     PickUpFromServer pickUpFromServer = new PickUpFromServer( );
     ServerConnector serverConnector = new ServerConnector( pickUpFromServer );
     serverConnector.connect( );
+    new LoginLogic( serverConnector, pickUpFromServer );
   }
 
 }

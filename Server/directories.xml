@@ -1,0 +1,19 @@
+<java.util.concurrent.CopyOnWriteArrayList serialization="custom">
+  <java.util.concurrent.CopyOnWriteArrayList>
+    <default/>
+    <int>1</int>
+    <shared.resourcesLibrary.Directory>
+      <name>Server</name>
+      <next>
+        <shared.resourcesLibrary.Directory>
+          <name>server</name>
+          <next>
+            <shared.resourcesLibrary.Resource>
+              <name>users</name>
+            </shared.resourcesLibrary.Resource>
+          </next>
+        </shared.resourcesLibrary.Directory>
+      </next>
+    </shared.resourcesLibrary.Directory>
+  </java.util.concurrent.CopyOnWriteArrayList>
+</java.util.concurrent.CopyOnWriteArrayList>
