@@ -5,6 +5,7 @@ import client.networkClient.PickUpFromServer;
 import client.networkClient.DeliverToServer;
 import client.networkClient.IDataListener;
 import client.networkClient.ServerConnector;
+import shared.packet.Data;
 import shared.packet.Instruction;
 import javax.swing.JOptionPane;
 
@@ -35,12 +36,13 @@ public class LoginLogic implements IDataListener {
   }
 
   @Override
-  public void handleData( Instruction instruction ) {
-    if ( instruction == Instruction.LOG_IN_SUCCESS_USER ) {
+  public void handleData( Data data ) {
+    if ( data.getInstruction( ) == Instruction.LOG_IN_SUCCESS_USER ) {
       loginFrame.dispose( );
-    } else if ( instruction == Instruction.LOG_IN_SUCCESS_ADMIN ) {
+      new MainUserLogic( serverConnector, pickUpFromServer, data.getLogin( ) );
+    } else if ( data.getInstruction( ) == Instruction.LOG_IN_SUCCESS_ADMIN ) {
       loginFrame.dispose( );
-    } else if ( instruction == Instruction.LOG_IN_ERROR ) {
+    } else if ( data.getInstruction( ) == Instruction.LOG_IN_ERROR ) {
       JOptionPane.showMessageDialog( null, "Wrong username or password" );
     }
   }

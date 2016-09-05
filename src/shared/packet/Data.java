@@ -11,6 +11,7 @@ public class Data extends Package {
   private String password;
   private boolean isAdmin;
   private Instruction instruction;
+  private Integer points;
   private Object[][] ranking;
 
   public Data( String login, String password,
@@ -22,6 +23,14 @@ public class Data extends Package {
   
   public Data( ) {
     
+  }
+  
+  public Integer getPoints( ) {
+    return this.points;
+  }
+  
+  public void setPoints( Integer points ) {
+    this.points = points;
   }
   
   public Object[][] getRanking( ) {

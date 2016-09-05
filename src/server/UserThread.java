@@ -62,7 +62,23 @@ public class UserThread implements Runnable {
     if ( data.getInstruction( ) == Instruction.ASK_RANKING ) {
       this.sendRanking( );
     }
+    if ( data.getInstruction( ) == Instruction.ASK_POINTS ) {
+      this.sendPoints( data.getLogin( ) );
+    }
 
+  }
+
+  private void sendPoints( String login ) {
+    Data replay = new Data( );
+    replay.setInstruction( Instruction.SEND_POINTS );
+    Integer points = 0;
+    for ( int i=0; i < Server.getUsersAll( ).size( ); i++ ) {
+      if ( Server.getUsersAll( ).get( i ).getLogin( ).equals( login ) ) {
+        points = Server.getUsersAll( ).get( i ).getPoints( );
+      }
+    }
+    replay.setPoints( points );
+    this.sendData( replay );
   }
 
   private void sendRanking( ) {

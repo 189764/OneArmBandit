@@ -7,6 +7,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextPane;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 
@@ -17,9 +18,11 @@ public class RegistrationFrame extends JFrame {
   private RegistrationLogic registrationLogic;
   private RegistrationFrame thisFrame;
 
+  
 	public RegistrationFrame( RegistrationLogic registrationLogic ) {
     this.thisFrame = this;
     this.registrationLogic = registrationLogic;
+    setSize( new Dimension( 400, 240 ) );
 		getContentPane().setLayout(null);
 		getContentPane().setName("One Arm Bandit");
 		JButton btnRejestruj = new JButton("Register");

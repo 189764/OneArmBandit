@@ -10,6 +10,7 @@ import client.frames.LoginLogic;
 
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 
@@ -27,6 +28,7 @@ public class LoginFrame extends JFrame {
   public LoginFrame( LoginLogic loginLogic ) {
     this.thisFrame = this;
     this.loginLogic = loginLogic;
+    setSize( new Dimension( 400, 240 ) );
     getContentPane().setLayout(null);
     getContentPane().setName("One Arm Bandit");
     JButton btnLoguj = new JButton("Log in");

@@ -4,6 +4,7 @@ import client.networkClient.PickUpFromServer;
 import client.networkClient.DeliverToServer;
 import client.networkClient.IDataListener;
 import client.networkClient.ServerConnector;
+import shared.packet.Data;
 import shared.packet.Instruction;
 import javax.swing.JOptionPane;
 
@@ -37,11 +38,12 @@ public class RegistrationLogic implements IDataListener {
   }
 
   @Override
-  public void handleData( Instruction instruction ) {
-    if ( instruction == Instruction.REGISTER_SUCCES ) {
+  public void handleData( Data data ) {
+    if ( data.getInstruction( ) == Instruction.REGISTER_SUCCES ) {
       System.out.println( "register" );
       registrationFrame.dispose( );
-      } else if ( instruction == Instruction.REGISTER_ERROR ) {
+      new MainUserLogic( serverConnector, pickUpFromServer, data.getLogin( ) );
+      } else if ( data.getInstruction( ) == Instruction.REGISTER_ERROR ) {
         JOptionPane.showMessageDialog( null, "Wrong username - probably already exists" );
       }
     }

@@ -18,7 +18,7 @@ public class PickUpFromServer {
   
   public void handleDataListeners( Data data ) {
     for ( IDataListener listener : this.dataListeners ) {
-      listener.handleData( data.getInstruction( ) );
+      listener.handleData( data );
     }
   }
 }

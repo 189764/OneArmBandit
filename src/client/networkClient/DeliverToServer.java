@@ -49,4 +49,9 @@ public class DeliverToServer {
     this.serverConnector.sendToServer( userData );
   }
   
+  public void askPoints ( String login ) {
+    Package userData = new Data( login, "", Instruction.ASK_POINTS );
+    this.serverConnector.sendToServer( userData );
+  }
+  
 }
