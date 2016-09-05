@@ -2,6 +2,8 @@ package client.frames;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
+import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -22,7 +24,7 @@ public class AdminManagementFrame extends JFrame {
 	private JTextField textField;
 	public AdminManagementFrame() {
 		getContentPane().setLayout(null);
-		
+		setSize( new Dimension( 550, 400 ) );
 		JLabel lblCentralBank = new JLabel("CENTRAL BANK:");
 		lblCentralBank.setFont(new Font("Sylfaen", Font.PLAIN, 25));
 		lblCentralBank.setBounds(21, 11, 318, 53);
