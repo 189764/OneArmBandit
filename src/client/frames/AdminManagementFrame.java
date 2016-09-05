@@ -7,8 +7,12 @@ import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
+
+
 import javax.swing.JTextField;
 
 public class AdminManagementFrame extends JFrame {
@@ -23,6 +27,7 @@ public class AdminManagementFrame extends JFrame {
 	private JTextField textFieldS9;
 	private JTextField textField;
 	public AdminManagementFrame() {
+		//AdminManagementLogic admMan = new AdminManagementLogic();
 		getContentPane().setLayout(null);
 		setSize( new Dimension( 550, 400 ) );
 		JLabel lblCentralBank = new JLabel("CENTRAL BANK:");
@@ -33,6 +38,8 @@ public class AdminManagementFrame extends JFrame {
 		JButton btnSetPrizes = new JButton("Set prizes");
 		btnSetPrizes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+		//	List<Integer> listOfSymbolValues = new ArrayList<Integer>();
+		//	admMan.setSymbolValues(listOfSymbolValues);
 			}
 		});
 		btnSetPrizes.setBounds(10, 298, 127, 36);

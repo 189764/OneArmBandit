@@ -27,7 +27,7 @@ public class CentralBank {
 		if(points < quantity){
 			throw new NotEnoughMoneyException();
 		}
-		
+		bandit.addPoints(quantity);
 	}
 	
 	public void addPoints(int quantity) {

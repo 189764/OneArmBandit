@@ -34,6 +34,10 @@ public class Bandit {
 		tab = new int[3][3];
 	}
 
+	public void addPoints(int points) {
+		bank += points;
+	}
+	
 	public int maxSymbol() {
 		List<Integer> symbols = new ArrayList<Integer>();
 		symbols.add(symbolOne);
@@ -118,7 +122,7 @@ public class Bandit {
 	
 	}
 	
-	public void bet(User user) {
+	public int[][] bet(User user) {
 		if(bank < maxSymbol()*user.getStake()){
 			throw new NotEnoughMoneyInBanditException();
 		} else if(user.getPoints()<user.getStake()) {
@@ -154,7 +158,9 @@ public class Bandit {
 		if(prize>0){
 			cashOut(prize, user);
 		}
+		
 		}
+		return tab;
 	}
 	
 
