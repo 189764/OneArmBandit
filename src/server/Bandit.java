@@ -151,7 +151,7 @@ public class Bandit {
 	
 
 	
-	public static int getSymbolOne() {
+	public int getSymbolOne() {
 		return symbolOne;
 	}
 

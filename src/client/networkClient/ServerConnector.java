@@ -25,45 +25,35 @@ public class ServerConnector {
   private boolean isConnected = false;
   private PickUpFromServer hfs;
 
-  public ServerConnector( PickUpFromServer hfs ) {
+  public ServerConnector( PickUpFromServer hfs ) throws IOException {
     this.hfs = hfs;
+    
+    ConnectionConfiguration conf = ConnectionConfiguration.getConfiguration();
+    this.socket = new Socket(conf.getAddress(), conf.getPort());
+    this.addr = this.socket.getInetAddress();
+  }
+  
+  public void setSocket(Socket socket)
+  {
+      this.socket=socket;
   }
 
-  public void connect( ) {
-    if ( !this.isConnected ) {
-      ConnectionConfiguration conf =
-          ConnectionConfiguration.getConfiguration( );
-      try {
-        this.socket = new Socket(
-            conf.getAddress( ), conf.getPort( ) );
-        this.addr = this.socket.getInetAddress( );
-        System.out.println( 
-            ">>>>> ServerConnector.connect(): Connected with " + this.addr );
+  public void connect() throws UnknownHostException, ConnectException, IOException {
+      if (!this.isConnected) {
+          System.out.println(
+                  ">>>>> ServerConnector.connect(): Connected with " + this.addr);
 
-        this.clientOutputStream = new ObjectOutputStream(
-            this.socket.getOutputStream( ) );
-        this.clientInputStream = new ObjectInputStream(
-            this.socket.getInputStream( ) );
+          this.clientOutputStream = new ObjectOutputStream(
+                  this.socket.getOutputStream());
+          this.clientInputStream = new ObjectInputStream(
+                  this.socket.getInputStream());
 
-        this.isConnected = true;
-      } catch ( UnknownHostException e ) {
-        System.out.println(
-            ">>>>> ServerConnector.connect(): do not recognize host" );
-        e.printStackTrace( );
-      } catch ( ConnectException e ) {
-        JOptionPane.showMessageDialog( null, "Server is not working" );
-        System.out.println(
-            ">>>>> ServerConnector.connect(): Server is not working" );
-        e.printStackTrace( ); 
-      } catch ( IOException e ) {
-        System.out.println(
-            ">>>>> ServerConnector.connect(): IOException while creating Socket" );
-        e.printStackTrace( );
-      } 
-      this.listenThread( );
-    } else {
-      JOptionPane.showMessageDialog( null, "You are already connected!" );
-    }
+          this.isConnected = true;
+
+          this.listenThread();
+      } else {
+          JOptionPane.showMessageDialog(null, "You are already connected!");
+      }
   }
 
   public void sendToServer( Package packet ) {
