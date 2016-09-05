@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import server.Bandit;
+import server.exceptions.NotEnoughMoneyException;
 import server.exceptions.NotEnoughMoneyInBanditException;
 import shared.data.User;
 public class Bandit {
@@ -120,8 +121,15 @@ public class Bandit {
 	public void bet(User user) {
 		if(bank < maxSymbol()*user.getStake()){
 			throw new NotEnoughMoneyInBanditException();
-		} else {
+		} else if(user.getPoints()<user.getStake()) {
+			
+				throw new NotEnoughMoneyException();
+			
+		}		
 		
+		else {
+		user.minusPoints(user.getStake());
+		bank += user.getStake();
 		int prize = 0;
 		randomSymbols();
 		

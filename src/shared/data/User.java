@@ -129,7 +129,10 @@ public class User implements Comparable<User> {
 		points += prize;
 		
 	}
-
+	public void minusPoints(int stake) {
+		points -= stake;
+		
+	}
 
 	
 	
