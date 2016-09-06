@@ -1,19 +1,24 @@
 package shared;
 
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public final class ConnectionConfiguration {
+
+  private static final Logger LOGGER = LogManager
+    .getLogger( ConnectionConfiguration.class );
 
   private static final String FILE_NAME = "config.properties";
   private static ConnectionConfiguration instance = null;
   private String address;
   private int port;
-  
+
   private ConnectionConfiguration( ) {
 
   }
@@ -34,12 +39,12 @@ public final class ConnectionConfiguration {
       String number = props.getProperty( "port" );
       scc.port = Integer.parseInt( number );
       scc.address = props.getProperty( "ip" );
-      System.out.println( "Successfuly loaded values from config.properties file" );
+      LOGGER.info( "Successfuly loaded values from config.properties file" );
     } catch ( FileNotFoundException e ) {
-      System.out.println( "Cannot find config.properties file!" );
+      LOGGER.fatal( "Cannot find config.properties file!" );
       e.printStackTrace( );
     } catch ( IOException e ) {
-      System.out.println( "Cannot read from config.properties file!" );
+      LOGGER.fatal( "Cannot read from config.properties file!" );
       e.printStackTrace( );
     }
     return scc;
@@ -54,4 +59,3 @@ public final class ConnectionConfiguration {
   }
 
 }
-

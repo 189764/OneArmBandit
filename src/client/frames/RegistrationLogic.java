@@ -8,20 +8,26 @@ import shared.packet.Data;
 import shared.packet.Instruction;
 import javax.swing.JOptionPane;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class RegistrationLogic implements IDataListener {
+
+  private static final Logger LOGGER = LogManager
+    .getLogger( RegistrationLogic.class );
 
   private DeliverToServer deliverToServer;
   private PickUpFromServer pickUpFromServer;
   private ServerConnector serverConnector;
   private RegistrationFrame registrationFrame;
 
-  public RegistrationLogic( ServerConnector serverConnector, 
+  public RegistrationLogic( ServerConnector serverConnector,
       PickUpFromServer pickUpFromServer ) {
     this.pickUpFromServer = pickUpFromServer;
     this.serverConnector = serverConnector;
     deliverToServer = new DeliverToServer( serverConnector );
     pickUpFromServer.addDataListener( this );
-    registrationFrame = new RegistrationFrame ( this );
+    registrationFrame = new RegistrationFrame( this );
   }
 
   public void register( String login, String password, String password1 ) {
@@ -30,23 +36,22 @@ public class RegistrationLogic implements IDataListener {
     }
     deliverToServer.register( login, password );
   }
-  
+
   public void logIn( ) {
-    new LoginLogic( this.serverConnector, 
-        this.pickUpFromServer );
+    new LoginLogic( this.serverConnector, this.pickUpFromServer );
     registrationFrame.dispose( );
   }
 
   @Override
   public void handleData( Data data ) {
     if ( data.getInstruction( ) == Instruction.REGISTER_SUCCES ) {
-      System.out.println( "register" );
+      LOGGER.info( "register" );
       registrationFrame.dispose( );
       new MainUserLogic( serverConnector, pickUpFromServer, data.getLogin( ) );
-      } else if ( data.getInstruction( ) == Instruction.REGISTER_ERROR ) {
-        JOptionPane.showMessageDialog( null, "Wrong username - probably already exists" );
-      }
+    } else if ( data.getInstruction( ) == Instruction.REGISTER_ERROR ) {
+      JOptionPane.showMessageDialog( null,
+          "Wrong username - probably already exists" );
     }
+  }
 
 }
-

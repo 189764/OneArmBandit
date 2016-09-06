@@ -15,74 +15,73 @@ public class Data extends Package implements Serializable {
   private boolean isAdmin;
   private Instruction instruction;
   private Integer points;
-  private Object[][] ranking;
-  
+  private Object [ ] [ ] ranking;
 
   private ArrayList<Integer> listOfSymbolValues;
 
-  public Data(String login, String password, Instruction instruction) {
+  public Data( String login, String password, Instruction instruction ) {
     this.login = login;
     this.password = password;
     this.instruction = instruction;
   }
 
-  public Data() {
+  public Data( ) {
 
   }
 
-  public ArrayList<Integer> getListOfSymbolValues() {
+  public ArrayList<Integer> getListOfSymbolValues( ) {
     return listOfSymbolValues;
   }
 
-  public void setListOfSymbolValues(ArrayList<Integer> listOfSymbolValues) {
+  public void setListOfSymbolValues( ArrayList<Integer> listOfSymbolValues ) {
     this.listOfSymbolValues = listOfSymbolValues;
   }
 
-  public Integer getPoints() {
+  public Integer getPoints( ) {
     return this.points;
   }
 
-  public void setPoints(Integer points) {
+  public void setPoints( Integer points ) {
     this.points = points;
   }
 
-  public Object[][] getRanking() {
+  public Object [ ] [ ] getRanking( ) {
     return this.ranking;
   }
 
-  public void setRanking(Object[][] ranking) {
+  public void setRanking( Object [ ] [ ] ranking ) {
     this.ranking = ranking;
   }
 
-  public boolean getIsAdmin() {
+  public boolean getIsAdmin( ) {
     return this.isAdmin;
   }
 
-  public void setIsAdmin(boolean isAdmin) {
+  public void setIsAdmin( boolean isAdmin ) {
     this.isAdmin = isAdmin;
   }
 
-  public String getLogin() {
+  public String getLogin( ) {
     return this.login;
   }
 
-  public void setLogin(String login) {
+  public void setLogin( String login ) {
     this.login = login;
   }
 
-  public String getPassword() {
+  public String getPassword( ) {
     return this.password;
   }
 
-  public void setPassword(String password) {
+  public void setPassword( String password ) {
     this.password = password;
   }
 
-  public Instruction getInstruction() {
+  public Instruction getInstruction( ) {
     return this.instruction;
   }
 
-  public void setInstruction(Instruction instruction) {
+  public void setInstruction( Instruction instruction ) {
     this.instruction = instruction;
   }
 

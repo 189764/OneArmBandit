@@ -10,13 +10,16 @@ import java.net.UnknownHostException;
 
 import javax.swing.JOptionPane;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import shared.ConnectionConfiguration;
 import shared.packet.Data;
 import shared.packet.Package;
 
-
-
 public class ServerConnector {
+
+  private static final Logger LOGGER = LogManager.getLogger( ServerConnector.class );
 
   private Socket socket;
   private InetAddress addr;
@@ -27,41 +30,39 @@ public class ServerConnector {
 
   public ServerConnector( PickUpFromServer pickUpFromServer ) throws IOException {
     this.pickUpFromServer = pickUpFromServer;
-    
-    ConnectionConfiguration configuration = ConnectionConfiguration.getConfiguration();
-    this.socket = new Socket(configuration.getAddress(), configuration.getPort());
-    this.addr = this.socket.getInetAddress();
-  }
-  
-  public void setSocket(Socket socket)
-  {
-      this.socket=socket;
+
+    ConnectionConfiguration configuration = ConnectionConfiguration
+      .getConfiguration( );
+    this.socket = new Socket( configuration.getAddress( ),
+        configuration.getPort( ) );
+    this.addr = this.socket.getInetAddress( );
   }
 
-  public void connect() throws UnknownHostException, ConnectException, IOException {
-      if (!this.isConnected) {
-          System.out.println(
-                  ">>>>> ServerConnector.connect(): Connected with " + this.addr);
+  public void setSocket( Socket socket ) {
+    this.socket = socket;
+  }
 
-          this.clientOutputStream = new ObjectOutputStream(
-                  this.socket.getOutputStream());
-          this.clientInputStream = new ObjectInputStream(
-                  this.socket.getInputStream());
+  public void connect( ) throws UnknownHostException, ConnectException, IOException {
+    if ( !this.isConnected ) {
+      LOGGER.info( "Connected with " + this.addr );
+      this.clientOutputStream = new ObjectOutputStream(
+          this.socket.getOutputStream( ) );
+      this.clientInputStream = new ObjectInputStream(
+          this.socket.getInputStream( ) );
 
-          this.isConnected = true;
+      this.isConnected = true;
 
-          this.listenThread();
-      } else {
-          JOptionPane.showMessageDialog(null, "You are already connected!");
-      }
+      this.listenThread( );
+    } else {
+      JOptionPane.showMessageDialog( null, "You are already connected!" );
+    }
   }
 
   public void sendToServer( Package packet ) {
     try {
       this.clientOutputStream.writeObject( packet );
     } catch ( IOException e ) {
-      System.out.println(
-          ">>>>> ServerConnector.sendToServer(): cannot write to socket!" );
+      LOGGER.fatal( "cannot write to socket!" );
       e.printStackTrace( );
     }
   }
@@ -70,31 +71,27 @@ public class ServerConnector {
     Package packet = null;
     try {
       packet = (Package) this.clientInputStream.readObject( );
-      System.out.println( "recieved " + packet.toString( ) );
     } catch ( ClassNotFoundException e ) {
-      System.out.println(
-          ">>>>> ServerConnector.listenFromServer(): cannot cast to Package class" );
+      LOGGER.fatal( "cannot cast to Package class" );
       e.printStackTrace( );
     } catch ( IOException e ) {
-      System.out.println( ">>>>> ServerConnector.listenFromServer(): " +
-          "IOException while reading from socket" );
+      LOGGER.fatal( "IOException while reading from socket" );
       e.printStackTrace( );
     }
 
     if ( packet instanceof Data ) {
       Data data = (Data) packet;
       this.pickUpFromServer.handleDataListeners( data );
-    } 
+    }
   }
 
   public void disconnect( ) {
     try {
       this.socket.close( );
       this.isConnected = false;
-      
+
     } catch ( IOException e ) {
-      System.out.println(
-          ">>>>> ServerConnector.disconnect(): IOException while closing socket" );
+      LOGGER.fatal( "IOException while closing socket" );
       e.printStackTrace( );
     }
   }
@@ -106,7 +103,7 @@ public class ServerConnector {
   public void setConnected( boolean isConnected ) {
     this.isConnected = isConnected;
   }
-    
+
   private void listenThread( ) {
     Thread incomingReader = new Thread( new IncomingReader( ) );
     incomingReader.start( );

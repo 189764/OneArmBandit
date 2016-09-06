@@ -1,0 +1,38 @@
+<server.Bandit>
+  <generator serialization="custom">
+    <java.util.Random>
+      <default>
+        <seed>125039274886686</seed>
+        <nextNextGaussian>0.0</nextNextGaussian>
+        <haveNextNextGaussian>false</haveNextNextGaussian>
+      </default>
+    </java.util.Random>
+  </generator>
+  <bank>323</bank>
+  <tab>
+    <java.lang.Integer-array>
+      <int>1</int>
+      <int>3</int>
+      <int>7</int>
+    </java.lang.Integer-array>
+    <java.lang.Integer-array>
+      <int>1</int>
+      <int>1</int>
+      <int>1</int>
+    </java.lang.Integer-array>
+    <java.lang.Integer-array>
+      <int>3</int>
+      <int>2</int>
+      <int>7</int>
+    </java.lang.Integer-array>
+  </tab>
+  <symbolOne>1</symbolOne>
+  <symbolTwo>2</symbolTwo>
+  <symbolThree>3</symbolThree>
+  <symbolFour>4</symbolFour>
+  <symbolFive>5</symbolFive>
+  <symbolSix>6</symbolSix>
+  <symbolSeven>7</symbolSeven>
+  <symbolEight>8</symbolEight>
+  <symbolNine>9</symbolNine>
+</server.Bandit>

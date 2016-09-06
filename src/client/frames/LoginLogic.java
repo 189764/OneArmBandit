@@ -1,5 +1,6 @@
 package client.frames;
 
+import client.Main;
 import client.frames.LoginFrame;
 import client.networkClient.PickUpFromServer;
 import client.networkClient.DeliverToServer;
@@ -9,7 +10,12 @@ import shared.packet.Data;
 import shared.packet.Instruction;
 import javax.swing.JOptionPane;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class LoginLogic implements IDataListener {
+
+  private static final Logger LOGGER = LogManager.getLogger( Main.class );
 
   private DeliverToServer deliverToServer;
   private PickUpFromServer pickUpFromServer;
@@ -26,7 +32,7 @@ public class LoginLogic implements IDataListener {
   }
 
   public void logIn( String login, String password ) {
-    System.out.println( "login " + login + " haslo " + password );
+    LOGGER.info( "login " + login + " haslo " + password );
     deliverToServer.logIn( login, password );
   }
 

@@ -1,27 +1,34 @@
 package shared.data.userExceptions;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class OutOfRangeStakeException extends RuntimeException {
 
-	  /**
-   * 
-   */
+  /**
+  * 
+  */
   private static final long serialVersionUID = 8596596511919810970L;
 
-    public OutOfRangeStakeException( ) {
-		    super( );
-		  }
+  private static final Logger LOGGER = LogManager
+    .getLogger( OutOfRangeStakeException.class );
 
-		  public OutOfRangeStakeException( String msg ) {
-		    super( msg );
-		  }
+  public OutOfRangeStakeException( ) {
+    super( );
+  }
 
-		  public OutOfRangeStakeException( String msg, Throwable cause ) {
-		    super( msg, cause );
-		  }
+  public OutOfRangeStakeException( String msg ) {
+    super( msg );
+    LOGGER.fatal( msg );
+  }
 
-		  public OutOfRangeStakeException( Throwable cause ) {
-		    super( cause );
-		  }
-	
-	
+  public OutOfRangeStakeException( String msg, Throwable cause ) {
+    super( msg, cause );
+    LOGGER.fatal( msg );
+  }
+
+  public OutOfRangeStakeException( Throwable cause ) {
+    super( cause );
+  }
+
 }
