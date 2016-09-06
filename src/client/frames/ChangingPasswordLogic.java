@@ -8,18 +8,24 @@ import shared.packet.Data;
 import shared.packet.Instruction;
 import javax.swing.JOptionPane;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class ChangingPasswordLogic implements IDataListener {
+
+  private static final Logger LOGGER = LogManager
+    .getLogger( ChangingPasswordLogic.class );
 
   private DeliverToServer deliverToServer;
   private ChangingPasswordFrame changingPasswordFrame;
   private String login;
-  
-  public ChangingPasswordLogic( ServerConnector serverConnector, 
+
+  public ChangingPasswordLogic( ServerConnector serverConnector,
       PickUpFromServer pickUpFromServer, String login ) {
     this.login = login;
     deliverToServer = new DeliverToServer( serverConnector );
     pickUpFromServer.addDataListener( this );
-    changingPasswordFrame = new ChangingPasswordFrame ( this );
+    changingPasswordFrame = new ChangingPasswordFrame( this );
   }
 
   public void changePassword( String password, String password1 ) {
@@ -31,13 +37,13 @@ public class ChangingPasswordLogic implements IDataListener {
 
   @Override
   public void handleData( Data data ) {
-    if ( data.getInstruction( ) == Instruction.CHANGE_PASSWORD_SUCCESS) {
-      System.out.println( "password changed" );
+    if ( data.getInstruction( ) == Instruction.CHANGE_PASSWORD_SUCCESS ) {
+      LOGGER.info( "Password has been changed" );
       changingPasswordFrame.dispose( );
-      } else if ( data.getInstruction( ) == Instruction.CHANGE_PASSWORD_ERROR ) {
-        JOptionPane.showMessageDialog( null, "Wrong passwords" );
-      }
+    } else if ( data.getInstruction( ) == Instruction.CHANGE_PASSWORD_ERROR ) {
+      JOptionPane.showMessageDialog( null, "Wrong passwords" );
+      LOGGER.error( "Password has not beed changed" );
     }
+  }
 
 }
-

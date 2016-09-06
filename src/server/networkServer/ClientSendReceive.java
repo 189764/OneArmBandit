@@ -5,10 +5,16 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import server.UserThread;
 import shared.packet.Package;
 
 public class ClientSendReceive {
+
+  private static final Logger LOGGER = LogManager
+    .getLogger( ClientSendReceive.class );
 
   private UserThread userThread;
   private Socket clientSocket;
@@ -32,8 +38,7 @@ public class ClientSendReceive {
     try {
       this.serverOutputStream.writeObject( packet );
     } catch ( IOException e ) {
-      System.out.println( 
-          ">>>>> ClientConnector.sendToClient(): cannot write to socket!" );
+      LOGGER.fatal( "cannot write to socket" );
       e.printStackTrace( );
     }
   }
@@ -42,22 +47,20 @@ public class ClientSendReceive {
 
     Package packet = null;
     while ( ifConnected ) {
-    try {
-      packet = (Package) this.serverInputStream.readObject( );
-      System.out.println( "recieved " + packet.toString( ) );
-      this.userThread.collectData( packet );
-    } catch ( ClassNotFoundException e ) {
-      System.out.println(
-          ">>>>> ClientConnector.listenFromClient(): cannot cast to Package class " );
-      e.printStackTrace( );
-    } catch ( IOException e ) {
-      System.out.println( ">>>>> ClientConnector.listenFromClient(): " +
-    "IOException while reading from socket" );
-      e.printStackTrace( );
-      ifConnected = false;
-      
+      try {
+        packet = (Package) this.serverInputStream.readObject( );
+        LOGGER.info( "recieved " + packet.toString( ) );
+        this.userThread.collectData( packet );
+      } catch ( ClassNotFoundException e ) {
+        LOGGER.fatal( "cannot cast to Package class" );
+        e.printStackTrace( );
+      } catch ( IOException e ) {
+        LOGGER.fatal( "IOException while reading from socket" );
+        e.printStackTrace( );
+        ifConnected = false;
+
+      }
     }
-  }
   }
 
   public boolean isIfConnected( ) {
@@ -67,5 +70,5 @@ public class ClientSendReceive {
   public void setIfConnected( boolean ifConnected ) {
     this.ifConnected = ifConnected;
   }
-  
+
 }
