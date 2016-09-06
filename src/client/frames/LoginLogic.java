@@ -42,6 +42,7 @@ public class LoginLogic implements IDataListener {
       new MainUserLogic( serverConnector, pickUpFromServer, data.getLogin( ) );
     } else if ( data.getInstruction( ) == Instruction.LOG_IN_SUCCESS_ADMIN ) {
       loginFrame.dispose( );
+      new AdminManagementLogic( serverConnector, pickUpFromServer );
     } else if ( data.getInstruction( ) == Instruction.LOG_IN_ERROR ) {
       JOptionPane.showMessageDialog( null, "Wrong username or password" );
     }

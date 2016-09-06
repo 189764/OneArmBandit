@@ -11,6 +11,12 @@
             <shared.resourcesLibrary.Resource>
               <name>users</name>
             </shared.resourcesLibrary.Resource>
+            <shared.resourcesLibrary.Resource>
+              <name>centralBank</name>
+            </shared.resourcesLibrary.Resource>
+            <shared.resourcesLibrary.Resource>
+              <name>bandit</name>
+            </shared.resourcesLibrary.Resource>
           </next>
         </shared.resourcesLibrary.Directory>
       </next>
