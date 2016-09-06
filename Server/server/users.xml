@@ -20,4 +20,11 @@
     <isAdmin>false</isAdmin>
     <stake>1</stake>
   </shared.data.User>
+  <shared.data.User>
+    <login>adam</login>
+    <password>adam</password>
+    <points>77</points>
+    <isAdmin>false</isAdmin>
+    <stake>1</stake>
+  </shared.data.User>
 </list>

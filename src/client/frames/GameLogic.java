@@ -1,5 +1,7 @@
 package client.frames;
 
+import javax.swing.JOptionPane;
+
 import client.networkClient.DeliverToServer;
 import client.networkClient.IDataListener;
 import client.networkClient.PickUpFromServer;
@@ -22,7 +24,7 @@ public class GameLogic implements IDataListener {
   }
   
   public void play( Integer stake ) {
-    deliverToServer.play(login, stake);
+    deliverToServer.play(this.login, stake);
   }
 
   public void showPoints( ) {
@@ -48,6 +50,9 @@ public class GameLogic implements IDataListener {
   public void handleData( Data data ) {
       if ( data.getInstruction() == Instruction.SEND_RESULT ) {
         showResult( (Integer[][] )data.getRanking( ) );
+      }
+      if ( data.getInstruction() == Instruction.WON ) {
+        JOptionPane.showMessageDialog( null, "Prize: " + data.getPoints( ) );
       }
       } 
 }

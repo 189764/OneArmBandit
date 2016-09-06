@@ -137,21 +137,28 @@ public class UserThread implements Runnable {
 	}
 
 	private void play(String login, Integer stake) {
-		User user = null;
+	  
+	  System.out.println( login );
 		for (int i = 0; i < Server.getUsersAll().size(); i++) {
 			System.out.println(Server.getUsersAll().get(i));
 			if (Server.getUsersAll().get(i).getLogin().equals(login)) {
 				Server.getUsersAll().get(i).setStake(stake);
-				user = Server.getUsersAll().get(i);
+				User user = Server.getUsersAll().get(i);
+		    Data replay = new Data();
+		    Integer prize = Server.getUsersAll().get(i).getPoints( );
+		    replay.setInstruction(Instruction.SEND_RESULT);
+		    replay.setRanking(Server.getBandit().bet(user));
+		    prize = Server.getUsersAll().get(i).getPoints( ) - prize + stake;
+		    this.sendData(replay);
+		    Data replay2 = new Data();
+		    replay2.setInstruction(Instruction.WON);
+		    replay2.setPoints( prize );
+		    this.sendData(replay2);
+		    this.resource.saveObject(Server.getCentralBank(), "server:centralBank");
+		    this.resource.saveObject(Server.getUsersAll(), "server:users");
+		    this.resource.saveObject(Server.getBandit(), "server:bandit");
 			}
 		}
-		Data replay = new Data();
-		replay.setInstruction(Instruction.SEND_RESULT);
-		replay.setRanking(Server.getBandit().bet(user));
-		this.sendData(replay);
-		this.resource.saveObject(Server.getCentralBank(), "server:centralBank");
-		this.resource.saveObject(Server.getUsersAll(), "server:users");
-		this.resource.saveObject(Server.getBandit(), "server:bandit");
 	}
 
 	private Instruction logIn(String login, String password) {

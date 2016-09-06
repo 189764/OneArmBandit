@@ -28,7 +28,7 @@ public class Bandit {
 	
 	
 	public Bandit() {
-		bank = 200;
+		bank = 5000;
 		generator = new Random();
 		tab = new Integer[3][3];
 	}
