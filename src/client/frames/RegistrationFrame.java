@@ -1,10 +1,8 @@
 package client.frames;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
-import javax.swing.JTextPane;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.Dimension;
@@ -12,16 +10,18 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 
 public class RegistrationFrame extends JFrame {
-	private JPasswordField passwordField;
+	/**
+   * 
+   */
+  private static final long serialVersionUID = 5973536421737799477L;
+
+  private JPasswordField passwordField;
 	private JTextField textField;
 	private JPasswordField passwordField_1;
-  private RegistrationLogic registrationLogic;
-  private RegistrationFrame thisFrame;
 
   
 	public RegistrationFrame( RegistrationLogic registrationLogic ) {
-    this.thisFrame = this;
-    this.registrationLogic = registrationLogic;
+
     setSize( new Dimension( 400, 240 ) );
 		getContentPane().setLayout(null);
 		getContentPane().setName("One Arm Bandit");
@@ -31,6 +31,7 @@ public class RegistrationFrame extends JFrame {
         String loginString = textField.getText( );
         @SuppressWarnings( "deprecation" )
         String passwordString = passwordField.getText( );
+        @SuppressWarnings( "deprecation" )
         String passwordString1 = passwordField_1.getText( );
         registrationLogic.register( loginString, passwordString, passwordString1 );
       }

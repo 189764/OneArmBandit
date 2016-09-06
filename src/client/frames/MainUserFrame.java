@@ -14,13 +14,8 @@ import java.awt.event.ActionEvent;
 
 public class MainUserFrame extends JFrame {
   
-  private MainUserLogic mainUserLogic;
-  private MainUserFrame thisFrame;
-  
-  
   public MainUserFrame( MainUserLogic mainUserLogic ) {
-    this.thisFrame = this;
-    this.mainUserLogic = mainUserLogic;
+
     setSize( new Dimension( 400, 240 ) );
     GridBagLayout gridBagLayout = new GridBagLayout();
     gridBagLayout.columnWidths = new int[]{431, 0};

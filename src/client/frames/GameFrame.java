@@ -12,7 +12,11 @@ import java.awt.Dimension;
 import javax.swing.JTextField;
 
 public class GameFrame extends JFrame {
-	private JTextField textField;
+	/**
+   * 
+   */
+  private static final long serialVersionUID = 5603105110124533265L;
+  private JTextField textField;
 	private JLabel label1;
 	private JLabel label2;
 	private JLabel label3;

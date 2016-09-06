@@ -23,13 +23,13 @@ public class ServerConnector {
   private ObjectOutputStream clientOutputStream;
   private ObjectInputStream clientInputStream;
   private boolean isConnected = false;
-  private PickUpFromServer hfs;
+  private PickUpFromServer pickUpFromServer;
 
-  public ServerConnector( PickUpFromServer hfs ) throws IOException {
-    this.hfs = hfs;
+  public ServerConnector( PickUpFromServer pickUpFromServer ) throws IOException {
+    this.pickUpFromServer = pickUpFromServer;
     
-    ConnectionConfiguration conf = ConnectionConfiguration.getConfiguration();
-    this.socket = new Socket(conf.getAddress(), conf.getPort());
+    ConnectionConfiguration configuration = ConnectionConfiguration.getConfiguration();
+    this.socket = new Socket(configuration.getAddress(), configuration.getPort());
     this.addr = this.socket.getInetAddress();
   }
   
@@ -82,8 +82,8 @@ public class ServerConnector {
     }
 
     if ( packet instanceof Data ) {
-      Data ud = (Data) packet;
-      this.hfs.handleDataListeners( ud );
+      Data data = (Data) packet;
+      this.pickUpFromServer.handleDataListeners( data );
     } 
   }
 

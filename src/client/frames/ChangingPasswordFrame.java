@@ -9,15 +9,15 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 
 public class ChangingPasswordFrame extends JFrame {
+  /**
+   * 
+   */
+  private static final long serialVersionUID = -3061026132611032983L;
   private JPasswordField passwordField;
   private JPasswordField passwordField_1;
-  private ChangingPasswordLogic changingPasswordLogic;
-  private ChangingPasswordFrame thisFrame;
 
   
   public ChangingPasswordFrame( ChangingPasswordLogic changingPasswordLogic ) {
-    this.thisFrame = this;
-    this.changingPasswordLogic = changingPasswordLogic;
     setSize( new Dimension( 400, 240 ) );
     getContentPane().setLayout(null);
     getContentPane().setName("One Arm Bandit");
@@ -26,6 +26,7 @@ public class ChangingPasswordFrame extends JFrame {
       public void actionPerformed(ActionEvent e) {
         @SuppressWarnings( "deprecation" )
         String passwordString = passwordField.getText( );
+        @SuppressWarnings( "deprecation" )
         String passwordString1 = passwordField_1.getText( );
         changingPasswordLogic.changePassword( passwordString, passwordString1 );
       }

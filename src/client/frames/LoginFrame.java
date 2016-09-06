@@ -1,10 +1,8 @@
 package client.frames;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
-import javax.swing.JTextPane;
 
 import client.frames.LoginLogic;
 
@@ -21,13 +19,9 @@ public class LoginFrame extends JFrame {
   private static final long serialVersionUID = 6235646634736375047L;
   private JPasswordField passwordField;
   private JTextField textField;
-  private LoginLogic loginLogic;
-  private LoginFrame thisFrame;
-  
   
   public LoginFrame( LoginLogic loginLogic ) {
-    this.thisFrame = this;
-    this.loginLogic = loginLogic;
+
     setSize( new Dimension( 400, 240 ) );
     getContentPane().setLayout(null);
     getContentPane().setName("One Arm Bandit");

@@ -11,16 +11,12 @@ import javax.swing.JOptionPane;
 public class ChangingPasswordLogic implements IDataListener {
 
   private DeliverToServer deliverToServer;
-  private PickUpFromServer pickUpFromServer;
-  private ServerConnector serverConnector;
   private ChangingPasswordFrame changingPasswordFrame;
   private String login;
   
   public ChangingPasswordLogic( ServerConnector serverConnector, 
       PickUpFromServer pickUpFromServer, String login ) {
     this.login = login;
-    this.pickUpFromServer = pickUpFromServer;
-    this.serverConnector = serverConnector;
     deliverToServer = new DeliverToServer( serverConnector );
     pickUpFromServer.addDataListener( this );
     changingPasswordFrame = new ChangingPasswordFrame ( this );

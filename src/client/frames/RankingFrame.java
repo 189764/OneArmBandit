@@ -2,11 +2,9 @@ package client.frames;
 
 import javax.swing.JFrame;
 import java.awt.GridBagLayout;
-import javax.swing.JPanel;
 
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
-import javax.swing.JTabbedPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;

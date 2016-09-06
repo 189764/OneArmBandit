@@ -35,7 +35,7 @@ public class Server {
       List<Object> objects = this.resource.getObjects( "server:centralBank" );
       centralBank = (CentralBank) objects.get( 0 );
     } catch ( LackOfFileException e ) {
-      System.out.println( "Creating empty file for users" );
+      System.out.println( "Creating empty file for central Bank" );
       centralBank = new CentralBank( 100000 );
       this.resource.saveObject( centralBank, "server:centralBank" );
     }
@@ -49,7 +49,7 @@ public class Server {
 	      List<Object> objects = this.resource.getObjects( "server:bandit" );
 	      bandit = (Bandit) objects.get( 0 );
 	    } catch ( LackOfFileException e ) {
-	      System.out.println( "Creating empty file for users" );
+	      System.out.println( "Creating empty file for bandit" );
 	      bandit = new Bandit(  );
 	      this.resource.saveObject( bandit, "server:bandit" );
 	    }

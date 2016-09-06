@@ -4,14 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import client.networkClient.DeliverToServer;
-import client.networkClient.IDataListener;
 import client.networkClient.PickUpFromServer;
 import client.networkClient.ServerConnector;
-import server.Bandit;
-import server.CentralBank;
-import shared.packet.Data;
 
-public class AdminManagementLogic implements IDataListener {
+public class AdminManagementLogic {
 
 	private AdminManagementFrame adminManagementFrame;
 	private DeliverToServer deliverToServer;
@@ -22,9 +18,7 @@ public class AdminManagementLogic implements IDataListener {
 	public AdminManagementLogic(ServerConnector serverConnector, PickUpFromServer pickUpFromServer ) {
 		this.pickUpFromServer = pickUpFromServer;
 		this.serverConnector = serverConnector;
-		this.login = login;
 		this.deliverToServer = new DeliverToServer(serverConnector);
-		pickUpFromServer.addDataListener(this);
 		adminManagementFrame = new AdminManagementFrame(this);
 	}
 
@@ -32,12 +26,6 @@ public class AdminManagementLogic implements IDataListener {
 
 	public void setSymbolValues( ArrayList<Integer> listOfSymbolValues) {
 		deliverToServer.setSymbols( listOfSymbolValues );
-	}
-
-	@Override
-	public void handleData(Data data) {
-		// TODO Auto-generated method stub
-
 	}
 	
 	public void sendPointsToBandit( Integer points ) {

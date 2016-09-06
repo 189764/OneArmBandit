@@ -2,7 +2,12 @@ package server.exceptions;
 
 public class NotEnoughMoneyException extends RuntimeException {
 
-	  public NotEnoughMoneyException( ) {
+	  /**
+   * 
+   */
+  private static final long serialVersionUID = 9000195850664794846L;
+
+    public NotEnoughMoneyException( ) {
 		    super( );
 		  }
 

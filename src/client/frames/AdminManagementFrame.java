@@ -8,17 +8,17 @@ import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.List;
 import java.awt.event.ActionEvent;
-import javax.swing.JTextPane;
 
 
 import javax.swing.JTextField;
 
 public class AdminManagementFrame extends JFrame {
 	
-	  private AdminManagementLogic adminManagementLogic;
-	  private AdminManagementFrame thisFrame;
+	  /**
+   * 
+   */
+  private static final long serialVersionUID = 2364216096003572992L;
 	  
 	private JTextField textFieldS1;
 	private JTextField textFieldS2;
@@ -32,10 +32,7 @@ public class AdminManagementFrame extends JFrame {
 	private JTextField textField;
 	
 	public AdminManagementFrame( AdminManagementLogic adminManagementLogic ) {
-	    this.thisFrame = this;
-	    this.adminManagementLogic = adminManagementLogic;
 
-	    
 		getContentPane().setLayout(null);
 		setSize( new Dimension( 550, 400 ) );
 		JLabel lblCentralBank = new JLabel("CENTRAL BANK:");
