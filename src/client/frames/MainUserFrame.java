@@ -32,6 +32,7 @@ public class MainUserFrame extends JFrame {
     JButton btnPlay = new JButton("Play");
     btnPlay.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
+    	  mainUserLogic.play();
       }
     });
     GridBagConstraints gbc_btnPlay = new GridBagConstraints();

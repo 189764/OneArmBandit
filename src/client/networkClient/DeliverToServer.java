@@ -1,5 +1,6 @@
 package client.networkClient;
 
+import java.util.ArrayList;
 import client.networkClient.ServerConnector;
 import shared.packet.Instruction;
 import shared.packet.Package;
@@ -39,8 +40,9 @@ public class DeliverToServer {
     this.serverConnector.sendToServer( userData );
   }
   
-  public void play( String login ) {
-    Package userData = new Data( login, "", Instruction.PLAY );
+  public void play( String login, Integer stake ) {
+    Data userData = new Data( login, "", Instruction.PLAY );
+    userData.setPoints(stake);
     this.serverConnector.sendToServer( userData );
   }
   
@@ -53,5 +55,18 @@ public class DeliverToServer {
     Package userData = new Data( login, "", Instruction.ASK_POINTS );
     this.serverConnector.sendToServer( userData );
   }
+  
+  public void transferPoints ( Integer points ) {
+	    Data userData = new Data( "", "", Instruction.TRANSFER );
+	    userData.setPoints( points );
+	    this.serverConnector.sendToServer( userData );
+  }
+
+public void setSymbols( ArrayList<Integer> listOfSymbolValues ) {
+    Data userData = new Data( "", "", Instruction.SET_OF_SYMBOL_VALUES );
+    userData.setListOfSymbolValues( listOfSymbolValues );
+    this.serverConnector.sendToServer( userData );
+}
+
   
 }

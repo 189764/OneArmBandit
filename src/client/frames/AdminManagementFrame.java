@@ -16,6 +16,10 @@ import javax.swing.JTextPane;
 import javax.swing.JTextField;
 
 public class AdminManagementFrame extends JFrame {
+	
+	  private AdminManagementLogic adminManagementLogic;
+	  private AdminManagementFrame thisFrame;
+	  
 	private JTextField textFieldS1;
 	private JTextField textFieldS2;
 	private JTextField textFieldS3;
@@ -26,8 +30,12 @@ public class AdminManagementFrame extends JFrame {
 	private JTextField textFieldS8;
 	private JTextField textFieldS9;
 	private JTextField textField;
-	public AdminManagementFrame() {
-		//AdminManagementLogic admMan = new AdminManagementLogic();
+	
+	public AdminManagementFrame( AdminManagementLogic adminManagementLogic ) {
+	    this.thisFrame = this;
+	    this.adminManagementLogic = adminManagementLogic;
+
+	    
 		getContentPane().setLayout(null);
 		setSize( new Dimension( 550, 400 ) );
 		JLabel lblCentralBank = new JLabel("CENTRAL BANK:");
@@ -38,8 +46,17 @@ public class AdminManagementFrame extends JFrame {
 		JButton btnSetPrizes = new JButton("Set prizes");
 		btnSetPrizes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-		//	List<Integer> listOfSymbolValues = new ArrayList<Integer>();
-		//	admMan.setSymbolValues(listOfSymbolValues);
+				ArrayList<Integer> listOfSymbolValues = new ArrayList<Integer>( );
+				listOfSymbolValues.add(Integer.parseInt( textFieldS1.getText()) );
+				listOfSymbolValues.add(Integer.parseInt( textFieldS2.getText()) );
+				listOfSymbolValues.add(Integer.parseInt( textFieldS3.getText()) );
+				listOfSymbolValues.add(Integer.parseInt( textFieldS4.getText()) );
+				listOfSymbolValues.add(Integer.parseInt( textFieldS5.getText()) );
+				listOfSymbolValues.add(Integer.parseInt( textFieldS6.getText()) );
+				listOfSymbolValues.add(Integer.parseInt( textFieldS7.getText()) );
+				listOfSymbolValues.add(Integer.parseInt( textFieldS8.getText()) );
+				listOfSymbolValues.add(Integer.parseInt( textFieldS9.getText()) );
+				adminManagementLogic.setSymbolValues(listOfSymbolValues);
 			}
 		});
 		btnSetPrizes.setBounds(10, 298, 127, 36);
@@ -136,7 +153,22 @@ public class AdminManagementFrame extends JFrame {
 		getContentPane().add(lblPointsToTransfer);
 		
 		JButton btnTransfer = new JButton("TRANSFER");
+		btnTransfer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				adminManagementLogic.sendPointsToBandit( Integer.parseInt( textField.getText()) );
+			}
+		});
 		btnTransfer.setBounds(165, 93, 332, 42);
 		getContentPane().add(btnTransfer);
+		
+		JButton btnLogOut = new JButton("Log out");
+		btnLogOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				adminManagementLogic.logOut();
+			}
+		});
+		btnLogOut.setBounds(374, 304, 97, 25);
+		getContentPane().add(btnLogOut);
+		setVisible( true );
 	}
 }

@@ -15,15 +15,64 @@ public class Server {
   private static HashMap<String, Integer> clients = new HashMap<String, Integer>( );
   private static HashMap<Integer, UserThread> threads = new HashMap<Integer, UserThread>( );
   private static List<User> usersAll = new ArrayList<User>( );
+  private static CentralBank centralBank = new CentralBank( 100000 );
+  private static Bandit bandit = new Bandit( );
   private ClientConnector clientConnector = new ClientConnector( );
   private AbstractResourcesLibrary resource = new SerializationLibrary( "Server" );
 
   public Server( ) {
     Server.usersAll = this.loadUserList( );
+    Server.centralBank = this.loadCentralBank();
+    Server.bandit = this.loadBandit( );
+    createAdmin( );
     this.clientConnector.listenForClients( );
   }
 
-  @SuppressWarnings( "unchecked" )
+  public CentralBank loadCentralBank( ) {
+    CentralBank centralBank = new CentralBank( );
+    try {
+      System.out.println( "Reading central bank" );
+      List<Object> objects = this.resource.getObjects( "server:centralBank" );
+      centralBank = (CentralBank) objects.get( 0 );
+    } catch ( LackOfFileException e ) {
+      System.out.println( "Creating empty file for users" );
+      centralBank = new CentralBank( 100000 );
+      this.resource.saveObject( centralBank, "server:centralBank" );
+    }
+    return centralBank;
+  } 
+  
+  public Bandit loadBandit( ) {
+	  Bandit bandit = new Bandit( );
+	    try {
+	      System.out.println( "Reading bandit" );
+	      List<Object> objects = this.resource.getObjects( "server:bandit" );
+	      bandit = (Bandit) objects.get( 0 );
+	    } catch ( LackOfFileException e ) {
+	      System.out.println( "Creating empty file for users" );
+	      bandit = new Bandit(  );
+	      this.resource.saveObject( bandit, "server:bandit" );
+	    }
+	    return bandit;
+	  }
+  
+  public static CentralBank getCentralBank() {
+	return Server.centralBank;
+}
+
+public static void setCentralBank(CentralBank centralBank) {
+	Server.centralBank = centralBank;
+}
+
+public static Bandit getBandit() {
+	return Server.bandit;
+}
+
+public static void setBandit(Bandit bandit) {
+	Server.bandit = bandit;
+}
+
+@SuppressWarnings( "unchecked" )
   public List<User> loadUserList( ) {
     List<User> users = new ArrayList<User>( );
     try {
@@ -39,6 +88,20 @@ public class Server {
     }
     return users;
   }
+  
+  public void createAdmin( ) {
+	  boolean flagIsAdminInBase = false;
+	  for (int i=0; i<Server.usersAll.size(); i++ ) {
+		  if ( Server.usersAll.get(i).getIsAdmin() ) {
+			  flagIsAdminInBase = true;
+		  }
+	  }
+	  if ( !flagIsAdminInBase ) {
+		  Server.usersAll.add( new User ( "admin", "admin", 0, true ) );
+		  this.resource.saveObject( Server.getUsersAll( ), "server:users" );
+	  }
+  }
+	  
 
   public static HashMap<String, Integer> getClientsMap( ) {
     return Server.clients;

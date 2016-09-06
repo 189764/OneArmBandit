@@ -33,7 +33,7 @@ public class MainUserLogic implements IDataListener {
   }
   
   public void play( ) {
-    
+    new GameLogic( serverConnector, pickUpFromServer, login );
   }
   
   public void changePassword( ) {

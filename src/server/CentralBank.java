@@ -7,10 +7,11 @@ public class CentralBank {
 
 	private int points;
 	
-	
+	public CentralBank() {
+
+	}
 	
 	public CentralBank(int points) {
-		super();
 		this.points = points;
 	}
 

@@ -13,25 +13,24 @@ public class Bandit {
 	private Random generator;
 	private int bank;
 
-	private int[][] tab;
+	private Integer[][] tab;
 
-	private static int symbolOne = 1;
-	private static int symbolTwo = 2;
-	private static int symbolThree = 3;
-	private static int symbolFour = 4;
-	private static int symbolFive = 5;
-	private static int symbolSix = 6;
-	private static int symbolSeven = 7;
-	private static int symbolEight = 8;
-	private static int symbolNine = 9;
+	private int symbolOne = 1;
+	private int symbolTwo = 2;
+	private int symbolThree = 3;
+	private int symbolFour = 4;
+	private int symbolFive = 5;
+	private int symbolSix = 6;
+	private int symbolSeven = 7;
+	private int symbolEight = 8;
+	private int symbolNine = 9;
 	
 	
 	
 	public Bandit() {
-		super();
-		bank = 0;
+		bank = 200;
 		generator = new Random();
-		tab = new int[3][3];
+		tab = new Integer[3][3];
 	}
 
 	public void addPoints(int points) {
@@ -122,7 +121,7 @@ public class Bandit {
 	
 	}
 	
-	public int[][] bet(User user) {
+	public Integer[][] bet(User user) {
 		if(bank < maxSymbol()*user.getStake()){
 			throw new NotEnoughMoneyInBanditException();
 		} else if(user.getPoints()<user.getStake()) {
@@ -170,88 +169,88 @@ public class Bandit {
 	}
 
 
-	public static void setSymbolOne(int symbolOne) {
-		Bandit.symbolOne = symbolOne;
+	public void setSymbolOne(int symbolOne) {
+		this.symbolOne = symbolOne;
 	}
 
 
-	public static int getSymbolTwo() {
+	public  int getSymbolTwo() {
 		return symbolTwo;
 	}
 
 
-	public static void setSymbolTwo(int symbolTwo) {
-		Bandit.symbolTwo = symbolTwo;
+	public  void setSymbolTwo(int symbolTwo) {
+		this.symbolTwo = symbolTwo;
 	}
 
 
-	public static int getSymbolThree() {
+	public  int getSymbolThree() {
 		return symbolThree;
 	}
 
 
-	public static void setSymbolThree(int symbolThree) {
-		Bandit.symbolThree = symbolThree;
+	public  void setSymbolThree(int symbolThree) {
+		this.symbolThree = symbolThree;
 	}
 
 
-	public static int getSymbolFour() {
+	public  int getSymbolFour() {
 		return symbolFour;
 	}
 
 
-	public static void setSymbolFour(int symbolFour) {
-		Bandit.symbolFour = symbolFour;
+	public  void setSymbolFour(int symbolFour) {
+		this.symbolFour = symbolFour;
 	}
 
 
-	public static int getSymbolFive() {
+	public  int getSymbolFive() {
 		return symbolFive;
 	}
 
 
-	public static void setSymbolFive(int symbolFive) {
-		Bandit.symbolFive = symbolFive;
+	public  void setSymbolFive(int symbolFive) {
+		this.symbolFive = symbolFive;
 	}
 
 
-	public static int getSymbolSix() {
+	public  int getSymbolSix() {
 		return symbolSix;
 	}
 
 
-	public static void setSymbolSix(int symbolSix) {
-		Bandit.symbolSix = symbolSix;
+	public  void setSymbolSix(int symbolSix) {
+		this.symbolSix = symbolSix;
 	}
 
 
-	public static int getSymbolSeven() {
+	public  int getSymbolSeven() {
 		return symbolSeven;
 	}
 
 
-	public static void setSymbolSeven(int symbolSeven) {
-		Bandit.symbolSeven = symbolSeven;
+	public  void setSymbolSeven(int symbolSeven) {
+		this.symbolSeven = symbolSeven;
 	}
 
 
-	public static int getSymbolEight() {
+	public  int getSymbolEight() {
 		return symbolEight;
 	}
 
 
-	public static void setSymbolEight(int symbolEight) {
-		Bandit.symbolEight = symbolEight;
+	public  void setSymbolEight(int symbolEight) {
+		this.symbolEight = symbolEight;
 	}
 
 
-	public static int getSymbolNine() {
+	public  int getSymbolNine() {
 		return symbolNine;
 	}
 
 
-	public static void setSymbolNine(int symbolNine) {
-		Bandit.symbolNine = symbolNine;
+	public  void setSymbolNine(int symbolNine) {
+		this.symbolNine = symbolNine;
 	}
 
 
