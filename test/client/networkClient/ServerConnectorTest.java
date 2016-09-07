@@ -3,6 +3,9 @@ package client.networkClient;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Matchers;
+import org.mockito.Mockito;
+
 import java.io.IOException;
 import java.net.ConnectException;
 import java.net.Socket;
@@ -43,6 +46,8 @@ public class ServerConnectorTest {
         // w connect jest wywolywana kolejna metoda
         //when(socket.getOutputStream()).thenReturn(/*Tu powinna byc prawidlowa wartosc*/);
         //when(socket.getInputStream()).thenReturn(/*Tu powinna byc prawidlowa wartosc*/);
+    	 Mockito.doNothing().when(socket).getOutputStream();
+    	//Mockito.doNothing().when(emailService).sendEmail(Matchers.anyObject(), Matchers.anyObject()));
        
         serverConnector.connect();
         // Asercja na pole isConnected (powinno byc true)
