@@ -39,13 +39,13 @@ public class ServerConnectorTest {
     // 2. Rzuca UnknownHostException
     // 3. Rzuca ConnectException
     // 4. Rzuca IOException
-     @Test
+    /* @Test
     public void Test1() throws ConnectException, UnknownHostException, IOException
     {
         // Powinno zwracac jakies prawidlowe wartosci - ale tego nie wiem jak zrobic bo
         // w connect jest wywolywana kolejna metoda
-        //when(socket.getOutputStream()).thenReturn(/*Tu powinna byc prawidlowa wartosc*/);
-        //when(socket.getInputStream()).thenReturn(/*Tu powinna byc prawidlowa wartosc*/);
+        //when(socket.getOutputStream()).thenReturn(/*Tu powinna byc prawidlowa wartosc*/ /*);
+        //when(socket.getInputStream()).thenReturn(/*Tu powinna byc prawidlowa wartosc*/ /*);
     	 Mockito.doNothing().when(socket).getOutputStream();
     	//Mockito.doNothing().when(emailService).sendEmail(Matchers.anyObject(), Matchers.anyObject()));
        
@@ -63,5 +63,13 @@ public class ServerConnectorTest {
         doThrow(new IOException()).when(socket).getInputStream();
         doThrow(new UnknownHostException()).when(socket).getInputStream();
         serverConnector.connect();
+    }*/
+    
+    @Test
+    public void connectTest() throws ConnectException, UnknownHostException, IOException {
+    	
+    	doThrow(new IOException())
+        .when(serverConnector)
+        .connect();
     }
 }

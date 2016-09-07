@@ -13,20 +13,20 @@ import org.mockito.Mock;
 
 public class DataTest {
 	
+	private static final Object[][] Object = null;
 	@Mock
 	Data data;
 	
 	@Before
 	public void setUp() {
 		data =new Data();
-		data = mock(Data.class);
+		//data = mock(Data.class);
 	}
 	
 	@Test
 	public void getPointsTest() {
 
 		data.setPoints(50);
-		when(data.getPoints()).thenReturn(50);
 		assertEquals(50, data.getPoints());
 	}
 	
@@ -34,7 +34,7 @@ public class DataTest {
 	public void isAdminTest() {
 		
 		data.setIsAdmin(true);
-		when(data.getIsAdmin()).thenReturn(true);
+		//when(data.getIsAdmin()).thenReturn(true);
 		assertEquals(true, data.getIsAdmin());
 		
 	}
@@ -43,7 +43,7 @@ public class DataTest {
 	public void getLoginTest() {
 		
 		data.setLogin("admin");
-		when(data.getLogin()).thenReturn("admin");
+		//when(data.getLogin()).thenReturn("admin");
 		assertEquals("admin", data.getLogin());
 	}
 	
@@ -51,7 +51,7 @@ public class DataTest {
 	public void getPasswordTest() {
 		
 		data.setPassword("admin");
-		when(data.getPassword()).thenReturn("admin");
+		//when(data.getPassword()).thenReturn("admin");
 		assertEquals("admin", data.getPassword());
 	}
 	
@@ -60,7 +60,7 @@ public class DataTest {
 		
 		Instruction instruction = Instruction.LOG_IN;
 		data.setInstruction(instruction);
-		when(data.getInstruction()).thenReturn(instruction);
+		//when(data.getInstruction()).thenReturn(instruction);
 		assertEquals(instruction, data.getInstruction());
 	}
 	
@@ -73,10 +73,18 @@ public class DataTest {
 		listOfSymbolValues.add(6);
 		
 		data.setListOfSymbolValues(listOfSymbolValues);
-		when(data.getListOfSymbolValues()).thenReturn(listOfSymbolValues);
+		//when(data.getListOfSymbolValues()).thenReturn(listOfSymbolValues);
 		assertEquals(listOfSymbolValues, data.getListOfSymbolValues());
 		
 	}
+	
+	/*@Test
+	public void getRankingTest() {
+		Object[][] ob = null;
+		data.setRanking(ob);
+		//when(data.getPassword()).thenReturn("admin");
+		assertEquals("admin", data.getRanking());
+	}*/
 
 
 }
