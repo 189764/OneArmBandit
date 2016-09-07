@@ -11,7 +11,7 @@ public abstract class AbstractLocalization {
    * 
    * @return
    */
-  protected String getName( ) {
+  public String getName( ) {
     return this.name;
   }
 

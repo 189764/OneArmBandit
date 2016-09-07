@@ -1,4 +1,4 @@
-package server;
+package test;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.doThrow;
@@ -13,6 +13,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import server.Bandit;
 import server.exceptions.NotEnoughMoneyInBanditException;
 import shared.data.User;
 
@@ -143,18 +144,6 @@ public class BanditTest {
 		User user = mock(User.class);
 		bandit.cashOut(5, user);
 		when(user.getPoints()).thenReturn(12);		
-	}
-	
-	
-	@Test
-	public void maxSymbolTest() {
-		
-		//bandit = mock(Bandit.class);
-		User user = mock(User.class);
-		bandit.maxSymbol();
-		when(bandit.getSymbolNine()).thenReturn(9);
-		//assertEquals(9, bandit.getSymbolNine());
-		assertEquals(9, user.getStake());
 	}
 	
 	

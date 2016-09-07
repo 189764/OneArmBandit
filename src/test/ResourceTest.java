@@ -1,4 +1,4 @@
-package shared.resourcesLibrary;
+package test;
 
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+
+import shared.resourcesLibrary.Resource;
 
 public class ResourceTest {
 

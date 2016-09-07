@@ -1,4 +1,4 @@
-package shared.resourcesLibrary;
+package test;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 
 import shared.packet.Data;
+import shared.resourcesLibrary.AbstractLocalization;
 
 public class AbstractLocalizationTest {
 	

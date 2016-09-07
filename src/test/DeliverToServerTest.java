@@ -1,4 +1,4 @@
-package client.networkClient;
+package test;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
@@ -10,6 +10,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+
+import client.networkClient.DeliverToServer;
+import client.networkClient.ServerConnector;
 
 public class DeliverToServerTest {
 	
