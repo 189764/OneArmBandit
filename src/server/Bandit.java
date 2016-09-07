@@ -9,6 +9,9 @@ import server.exceptions.NotEnoughMoneyException;
 import server.exceptions.NotEnoughMoneyInBanditException;
 import shared.data.User;
 
+/**
+ * represents bandit machine
+ */
 public class Bandit {
 
   private Random generator;
@@ -26,16 +29,27 @@ public class Bandit {
   private int symbolEight = 8;
   private int symbolNine = 9;
 
+  /**
+   * creates new bandit machine
+   */
   public Bandit( ) {
     bank = 5000;
     generator = new Random( );
     tab = new Integer [ 3 ] [ 3 ];
   }
 
+  /**
+   * add points to the bandit
+   * 
+   * @param points
+   */
   public void addPoints( int points ) {
     bank += points;
   }
 
+  /**
+   * @return maxSymbol
+   */
   public int maxSymbol( ) {
     List<Integer> symbols = new ArrayList<Integer>( );
     symbols.add( symbolOne );
@@ -56,6 +70,10 @@ public class Bandit {
     return max;
   }
 
+  /**
+   * @param symbol - symbol player won
+   * @return prize - which player won
+   */
   public int whatPrize( int symbol ) {
     if ( symbol == 1 ) {
       return symbolOne;

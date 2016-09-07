@@ -13,6 +13,18 @@ import shared.exceptions.resourcesLibraryExceptions.LackOfFileException;
 import shared.resourcesLibrary.AbstractResourcesLibrary;
 import shared.resourcesLibrary.SerializationLibrary;
 
+/**
+ * Server - class responsible for listening for new clients 
+ * and connecting them
+ */
+/**
+ * @author Rafal
+ *
+ */
+/**
+ * @author Rafal
+ *
+ */
 public class Server {
 
   private static final Logger LOGGER = LogManager.getLogger( Server.class );
@@ -25,6 +37,10 @@ public class Server {
   private ClientConnector clientConnector = new ClientConnector( );
   private AbstractResourcesLibrary resource = new SerializationLibrary( "Server" );
 
+  /**
+   * Constructor of server - loads data 
+   * and starts listening for new clients 
+   */
   public Server( ) {
     Server.usersAll = this.loadUserList( );
     Server.centralBank = this.loadCentralBank( );
@@ -33,6 +49,11 @@ public class Server {
     this.clientConnector.listenForClients( );
   }
 
+  /**
+   * Loads central bank and create bank if doesn't exist
+   * 
+   * @return centralBank
+   */
   public CentralBank loadCentralBank( ) {
     CentralBank centralBank = new CentralBank( );
     try {
@@ -47,6 +68,11 @@ public class Server {
     return centralBank;
   }
 
+  /**
+   * Loads bandit and create bandit if doesn't exist
+   * 
+   * @return bandit
+   */
   public Bandit loadBandit( ) {
     Bandit bandit = new Bandit( );
     try {
@@ -77,6 +103,11 @@ public class Server {
     Server.bandit = bandit;
   }
 
+  /**
+   * Loads list of users or create new file, if file doesn't exist
+   * 
+   * @return users - returns list of users
+   */
   @SuppressWarnings( "unchecked" )
   public List<User> loadUserList( ) {
     List<User> users = new ArrayList<User>( );
@@ -94,6 +125,10 @@ public class Server {
     return users;
   }
 
+  
+  /**
+   * creates admin if doesn't exist
+   */
   public void createAdmin( ) {
     boolean flagIsAdminInBase = false;
     for ( int i = 0; i < Server.usersAll.size( ); i++ ) {

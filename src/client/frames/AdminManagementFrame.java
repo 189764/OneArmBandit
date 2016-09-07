@@ -12,6 +12,9 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JTextField;
 
+/**
+ * Class represents administrator panel
+ */
 public class AdminManagementFrame extends JFrame {
 
   private static final long serialVersionUID = 2364216096003572992L;
@@ -27,6 +30,9 @@ public class AdminManagementFrame extends JFrame {
   private JTextField textFieldS9;
   private JTextField textField;
 
+  /**
+   * @param adminManagementLogic - AdminManagementLogic
+   */
   public AdminManagementFrame( AdminManagementLogic adminManagementLogic ) {
 
     getContentPane( ).setLayout( null );

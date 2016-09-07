@@ -9,6 +9,9 @@ import java.util.Properties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * build configuration of connection
+ */
 public final class ConnectionConfiguration {
 
   private static final Logger LOGGER = LogManager
@@ -23,6 +26,9 @@ public final class ConnectionConfiguration {
 
   }
 
+  /**
+   * @return instance - return instance of configuration
+   */
   public static ConnectionConfiguration getConfiguration( ) {
     if ( instance == null ) {
       instance = buildConfiguration( );
@@ -30,15 +36,18 @@ public final class ConnectionConfiguration {
     return instance;
   }
 
+  /**
+   * @return connectionConfiguration - build new configuration
+   */
   public static ConnectionConfiguration buildConfiguration( ) {
     Properties props = new Properties( );
-    ConnectionConfiguration scc = new ConnectionConfiguration( );
+    ConnectionConfiguration connectionConfiguration = new ConnectionConfiguration( );
     try {
       InputStream input = new FileInputStream( FILE_NAME );
       props.load( input );
       String number = props.getProperty( "port" );
-      scc.port = Integer.parseInt( number );
-      scc.address = props.getProperty( "ip" );
+      connectionConfiguration.port = Integer.parseInt( number );
+      connectionConfiguration.address = props.getProperty( "ip" );
       LOGGER.info( "Successfuly loaded values from config.properties file" );
     } catch ( FileNotFoundException e ) {
       LOGGER.fatal( "Cannot find config.properties file!" );
@@ -47,7 +56,7 @@ public final class ConnectionConfiguration {
       LOGGER.fatal( "Cannot read from config.properties file!" );
       e.printStackTrace( );
     }
-    return scc;
+    return connectionConfiguration;
   }
 
   public String getAddress( ) {

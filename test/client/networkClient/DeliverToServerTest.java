@@ -55,12 +55,6 @@ public class DeliverToServerTest {
 	}
 	
 	@Test
-	public void test6() {
-		DeliverToServer dts = new DeliverToServer(serverConnector);
-		dts.resetPassword("admin");
-	}
-	
-	@Test
 	public void test7() {
 		DeliverToServer dts = new DeliverToServer(serverConnector);
 		dts.changePassword("admin","admin");

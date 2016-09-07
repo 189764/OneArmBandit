@@ -22,6 +22,10 @@ public class LoginLogic implements IDataListener {
   private ServerConnector serverConnector;
   private LoginFrame loginFrame;
 
+  /**
+   * @param serverConnector - ServerConnector
+   * @param pickUpFromServer - PickUpFromServer
+   */
   public LoginLogic( ServerConnector serverConnector,
       PickUpFromServer pickUpFromServer ) {
     this.pickUpFromServer = pickUpFromServer;
@@ -31,16 +35,26 @@ public class LoginLogic implements IDataListener {
     loginFrame = new LoginFrame( this );
   }
 
+  /**
+   * @param login - String
+   * @param password - String
+   */
   public void logIn( String login, String password ) {
     LOGGER.info( "login " + login + " haslo " + password );
     deliverToServer.logIn( login, password );
   }
 
+  /**
+   * new registration window
+   */
   public void register( ) {
     new RegistrationLogic( this.serverConnector, this.pickUpFromServer );
     loginFrame.dispose( );
   }
 
+  /* (non-Javadoc)
+   * @see client.networkClient.IDataListener#handleData(shared.packet.Data)
+   */
   @Override
   public void handleData( Data data ) {
     if ( data.getInstruction( ) == Instruction.LOG_IN_SUCCESS_USER ) {

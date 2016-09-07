@@ -17,6 +17,11 @@ public class MainUserLogic implements IDataListener {
   private ServerConnector serverConnector;
   private String login;
 
+  /**
+   * @param serverConnector - serverConnector
+   * @param pickUpFromServer - PickUpFromServer
+   * @param login - String
+   */
   public MainUserLogic( ServerConnector serverConnector,
       PickUpFromServer pickUpFromServer, String login ) {
     this.pickUpFromServer = pickUpFromServer;
@@ -27,18 +32,30 @@ public class MainUserLogic implements IDataListener {
     mainUserFrame = new MainUserFrame( this );
   }
 
+  /**
+   * asks server to send a ranking
+   */
   public void showRanking( ) {
     deliverToServer.askRanking( "" );
   }
 
+  /**
+   * plays the game
+   */
   public void play( ) {
     new GameLogic( serverConnector, pickUpFromServer, login );
   }
 
+  /**
+   * new password change window
+   */
   public void changePassword( ) {
     new ChangingPasswordLogic( serverConnector, pickUpFromServer, login );
   }
 
+  /* (non-Javadoc)
+   * @see client.networkClient.IDataListener#handleData(shared.packet.Data)
+   */
   @Override
   public void handleData( Data data ) {
     if ( data.getInstruction( ) == Instruction.SEND_RANKING ) {
@@ -49,10 +66,16 @@ public class MainUserLogic implements IDataListener {
     }
   }
 
+  /**
+   * asks server to show how many points user has
+   */
   public void showPoints( ) {
     deliverToServer.askPoints( login );
   }
 
+  /**
+   * log out and run new login window
+   */
   public void logOut( ) {
     deliverToServer.logOut( login );
     mainUserFrame.dispose( );

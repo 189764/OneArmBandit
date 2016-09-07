@@ -13,6 +13,9 @@ import shared.packet.Package;
 import shared.resourcesLibrary.AbstractResourcesLibrary;
 import shared.resourcesLibrary.SerializationLibrary;
 
+/**
+ * Thread for single client. Allows to communicate with client
+ */
 public class UserThread implements Runnable {
 
   private static final Logger LOGGER = LogManager.getLogger( UserThread.class );
@@ -21,6 +24,12 @@ public class UserThread implements Runnable {
   private ClientSendReceive clientSendReceive;
   private AbstractResourcesLibrary resource = new SerializationLibrary( "Server" );
 
+  /**
+   * Creates new thread which contains object of clients connector and has his own id
+   * 
+   * @param clientSendReceive - object of networkLibrary for client 
+   *                          (one clientSendReceive = one client)
+   */
   public UserThread( ClientSendReceive clientSendReceive ) {
     this.id = Server.getThreadsMap( ).size( );
     this.clientSendReceive = clientSendReceive;
@@ -28,6 +37,9 @@ public class UserThread implements Runnable {
     LOGGER.info( "Created thread id: " + this.id );
   }
 
+  /**
+   * runs thread and starts listening data from client
+   */
   public void run( ) {
     LOGGER.info( "UserThread id: " + this.id + " run" );
     while ( true ) {
@@ -35,6 +47,11 @@ public class UserThread implements Runnable {
     }
   }
 
+  /**
+   * collects data from client and check type of the data in order to invoke proper method
+   * 
+   * @param packet
+   */
   public void collectData( Package packet ) {
     Data data = (Data) packet;
     LOGGER.info( "data collected" );
@@ -51,10 +68,6 @@ public class UserThread implements Runnable {
     if ( data.getInstruction( ) == Instruction.REGISTER ) {
       replay
         .setInstruction( this.register( data.getLogin( ), data.getPassword( ) ) );
-      this.sendData( replay );
-    }
-    if ( data.getInstruction( ) == Instruction.RESET_PASSWORD ) {
-      replay.setInstruction( this.resetPassword( data.getLogin( ) ) );
       this.sendData( replay );
     }
     if ( data.getInstruction( ) == Instruction.CHANGE_PASSWORD ) {
@@ -80,6 +93,9 @@ public class UserThread implements Runnable {
 
   }
 
+  /**
+   * @param listOfSymbolValues
+   */
   private void setOfSymbolValues( ArrayList<Integer> listOfSymbolValues ) {
     Server.getBandit( ).setSymbolOne( listOfSymbolValues.get( 0 ) );
     Server.getBandit( ).setSymbolTwo( listOfSymbolValues.get( 1 ) );
@@ -166,6 +182,13 @@ public class UserThread implements Runnable {
     }
   }
 
+  /**
+   * log in new client
+   * 
+   * @param login - login of User
+   * @param password - password of User
+   * @return Instruction - returns success or fail etc.
+   */
   private Instruction logIn( String login, String password ) {
     Instruction instruction = Instruction.LOG_IN_ERROR;
     for ( int i = 0; i < Server.getUsersAll( ).size( ); i++ ) {
@@ -184,6 +207,12 @@ public class UserThread implements Runnable {
     return instruction;
   }
 
+  /**
+   * log out user from clientsList
+   * 
+   * @param login - login of User
+   * @return status - returns success or fail etc
+   */
   private void logOut( String login ) {
     if ( Server.getClientsMap( ).containsKey( login ) ) {
       Server.removeClientsMap( login );
@@ -191,11 +220,23 @@ public class UserThread implements Runnable {
     }
   }
 
+  /**
+   * sends data to client
+   * 
+   * @param packet - packet to communicate
+   */
   private void sendData( Package packet ) {
     LOGGER.info( "Send package on thread id: " + this.id );
     this.clientSendReceive.sendToClient( packet );
   }
 
+  /**
+   * adds new User to userList
+   * 
+   * @param login - login of User
+   * @param password - password of User
+   * @return Instruction - returns success or fail etc.
+   */
   private Instruction register( String login, String password ) {
 
     boolean exists = false;
@@ -214,6 +255,13 @@ public class UserThread implements Runnable {
     }
   }
 
+  /**
+   * changes password of the user
+   * 
+   * @param login - login of User
+   * @param password - password of User
+   * @return Instruction - returns success or fail etc.
+   */
   private Instruction changePassword( String login, String newPassword ) {
     Instruction status = Instruction.CHANGE_PASSWORD_ERROR;
     for ( int i = 0; i < Server.getUsersAll( ).size( ); i++ ) {
@@ -222,19 +270,6 @@ public class UserThread implements Runnable {
         LOGGER.info( "Password for user " + login + " changed" );
         this.resource.saveObject( Server.getUsersAll( ), "server:users" );
         status = Instruction.CHANGE_PASSWORD_SUCCESS;
-      }
-    }
-    return status;
-  }
-
-  private Instruction resetPassword( String login ) {
-    Instruction status = Instruction.RESET_PASSWORD_ERROR;
-    for ( int i = 0; i < Server.getUsersAll( ).size( ); i++ ) {
-      if ( Server.getUsersAll( ).get( i ).getLogin( ).equals( login ) ) {
-        Server.getUsersAll( ).get( i ).setPassword( login );
-        LOGGER.info( "Password for user " + login + " was reset" );
-        this.resource.saveObject( Server.getUsersAll( ), "server:users" );
-        status = Instruction.RESET_PASSWORD_SUCCESS;
       }
     }
     return status;

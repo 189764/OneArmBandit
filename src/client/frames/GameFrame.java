@@ -11,10 +11,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JTextField;
 
+/**
+ * class represents frame of main game
+ */
 public class GameFrame extends JFrame {
-  /**
-   * 
-   */
+
   private static final long serialVersionUID = 5603105110124533265L;
   private JTextField textField;
   private JLabel label1;
@@ -27,6 +28,9 @@ public class GameFrame extends JFrame {
   private JLabel label8;
   private JLabel label9;
 
+  /**
+   * @param gameLogic - GameLogic
+   */
   public GameFrame( GameLogic gameLogic ) {
     setSize( new Dimension( 800, 600 ) );
     getContentPane( ).setLayout( null );

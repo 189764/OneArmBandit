@@ -8,14 +8,18 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 
+/**
+ * class represents view of changing password
+ */
 public class ChangingPasswordFrame extends JFrame {
-  /**
-   * 
-   */
+  
   private static final long serialVersionUID = -3061026132611032983L;
   private JPasswordField passwordField;
   private JPasswordField passwordField_1;
 
+  /**
+   * @param changingPasswordLogic - ChangingPasswordLogic
+   */
   public ChangingPasswordFrame( ChangingPasswordLogic changingPasswordLogic ) {
     setSize( new Dimension( 400, 240 ) );
     getContentPane( ).setLayout( null );

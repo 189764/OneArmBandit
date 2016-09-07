@@ -21,6 +21,10 @@ public class RegistrationLogic implements IDataListener {
   private ServerConnector serverConnector;
   private RegistrationFrame registrationFrame;
 
+  /**
+   * @param serverConnector - ServerConnector
+   * @param pickUpFromServer - PickUpFromServer
+   */
   public RegistrationLogic( ServerConnector serverConnector,
       PickUpFromServer pickUpFromServer ) {
     this.pickUpFromServer = pickUpFromServer;
@@ -30,6 +34,12 @@ public class RegistrationLogic implements IDataListener {
     registrationFrame = new RegistrationFrame( this );
   }
 
+  /**
+   * @param login - String
+   * @param password - String - first inserted password
+   * @param password1 - String - second inserted password
+   * passwords have to be the same
+   */
   public void register( String login, String password, String password1 ) {
     if ( !password.equals( password1 ) ) {
       JOptionPane.showMessageDialog( null, "Passwords are different" );
@@ -37,11 +47,17 @@ public class RegistrationLogic implements IDataListener {
     deliverToServer.register( login, password );
   }
 
+  /**
+   * new login window
+   */
   public void logIn( ) {
     new LoginLogic( this.serverConnector, this.pickUpFromServer );
     registrationFrame.dispose( );
   }
 
+  /* (non-Javadoc)
+   * @see client.networkClient.IDataListener#handleData(shared.packet.Data)
+   */
   @Override
   public void handleData( Data data ) {
     if ( data.getInstruction( ) == Instruction.REGISTER_SUCCES ) {

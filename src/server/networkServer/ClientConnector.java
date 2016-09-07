@@ -11,10 +11,16 @@ import org.apache.logging.log4j.Logger;
 
 import shared.ConnectionConfiguration;
 
+/**
+ * allow server to connect to client
+ */
 public class ClientConnector {
 
   private static final Logger LOGGER = LogManager.getLogger( ClientConnector.class );
 
+  /**
+   * listen for new client and connect them 
+   */
   public void listenForClients( ) {
 
     ServerSocket serverSocket;

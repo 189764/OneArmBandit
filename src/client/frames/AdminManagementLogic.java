@@ -7,6 +7,9 @@ import client.networkClient.DeliverToServer;
 import client.networkClient.PickUpFromServer;
 import client.networkClient.ServerConnector;
 
+/**
+ * class represents admin panel logic
+ */
 public class AdminManagementLogic {
 
   private AdminManagementFrame adminManagementFrame;
@@ -15,6 +18,10 @@ public class AdminManagementLogic {
   private ServerConnector serverConnector;
   private String login;
 
+  /**
+   * @param serverConnector - ServerConnector
+   * @param pickUpFromServer - PickUpFromServer
+   */
   public AdminManagementLogic( ServerConnector serverConnector,
       PickUpFromServer pickUpFromServer ) {
     this.pickUpFromServer = pickUpFromServer;
@@ -25,12 +32,18 @@ public class AdminManagementLogic {
 
   List<Integer> listOfSymbolValues = new ArrayList<Integer>( );
 
+  /**
+   * @param listOfSymbolValues - list of symbols got from frame
+   */
   public void setSymbolValues( ArrayList<Integer> listOfSymbolValues ) {
     deliverToServer.setSymbols( listOfSymbolValues );
   }
 
-  public void sendPointsToBandit( Integer points ) {
-    deliverToServer.transferPoints( points );
+  /**
+   * @param money - money transfered from bank to bandit
+   */
+  public void sendPointsToBandit( Integer money ) {
+    deliverToServer.transferPoints( money );
   }
 
   public void logOut( ) {

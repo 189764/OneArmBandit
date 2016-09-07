@@ -13,9 +13,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 
 public class LoginFrame extends JFrame {
-  /**
-   * 
-   */
+
   private static final long serialVersionUID = 6235646634736375047L;
   private JPasswordField passwordField;
   private JTextField textField;

@@ -28,6 +28,10 @@ public class ServerConnector {
   private boolean isConnected = false;
   private PickUpFromServer pickUpFromServer;
 
+  /**
+   * @param pickUpFromServer PickUpFromServer
+   * @throws IOException - when cannot get configuration
+   */
   public ServerConnector( PickUpFromServer pickUpFromServer ) throws IOException {
     this.pickUpFromServer = pickUpFromServer;
 
@@ -42,6 +46,11 @@ public class ServerConnector {
     this.socket = socket;
   }
 
+  /**
+   * @throws UnknownHostException
+   * @throws ConnectException
+   * @throws IOException
+   */
   public void connect( ) throws UnknownHostException, ConnectException, IOException {
     if ( !this.isConnected ) {
       LOGGER.info( "Connected with " + this.addr );
@@ -58,6 +67,9 @@ public class ServerConnector {
     }
   }
 
+  /**
+   * @param packet - package containing instruction
+   */
   public void sendToServer( Package packet ) {
     try {
       this.clientOutputStream.writeObject( packet );
@@ -67,6 +79,9 @@ public class ServerConnector {
     }
   }
 
+  /**
+   * listens new package from server
+   */
   public void listenFromServer( ) {
     Package packet = null;
     try {
@@ -85,6 +100,9 @@ public class ServerConnector {
     }
   }
 
+  /**
+   * disconnect user from server
+   */
   public void disconnect( ) {
     try {
       this.socket.close( );
@@ -104,11 +122,17 @@ public class ServerConnector {
     this.isConnected = isConnected;
   }
 
+  /**
+   * listen new created thread
+   */
   private void listenThread( ) {
     Thread incomingReader = new Thread( new IncomingReader( ) );
     incomingReader.start( );
   }
 
+  /**
+   * incoming reader
+   */
   public class IncomingReader implements Runnable {
     public void run( ) {
       while ( true ) {

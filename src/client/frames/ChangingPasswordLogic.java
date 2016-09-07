@@ -11,6 +11,9 @@ import javax.swing.JOptionPane;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * class represents logic of changing password
+ */
 public class ChangingPasswordLogic implements IDataListener {
 
   private static final Logger LOGGER = LogManager
@@ -20,6 +23,11 @@ public class ChangingPasswordLogic implements IDataListener {
   private ChangingPasswordFrame changingPasswordFrame;
   private String login;
 
+  /**
+   * @param serverConnector - serverConnector
+   * @param pickUpFromServer - PickUpFromServer
+   * @param login - String
+   */
   public ChangingPasswordLogic( ServerConnector serverConnector,
       PickUpFromServer pickUpFromServer, String login ) {
     this.login = login;
@@ -28,6 +36,11 @@ public class ChangingPasswordLogic implements IDataListener {
     changingPasswordFrame = new ChangingPasswordFrame( this );
   }
 
+  /**
+   * @param password - first inserted password
+   * @param password1 - second inserted password
+   * they have to be the same
+   */
   public void changePassword( String password, String password1 ) {
     if ( !password.equals( password1 ) ) {
       JOptionPane.showMessageDialog( null, "Passwords are different" );
@@ -35,6 +48,9 @@ public class ChangingPasswordLogic implements IDataListener {
     deliverToServer.changePassword( login, password );
   }
 
+  /* (non-Javadoc)
+   * @see client.networkClient.IDataListener#handleData(shared.packet.Data)
+   */
   @Override
   public void handleData( Data data ) {
     if ( data.getInstruction( ) == Instruction.CHANGE_PASSWORD_SUCCESS ) {

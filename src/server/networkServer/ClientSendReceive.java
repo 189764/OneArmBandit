@@ -11,6 +11,9 @@ import org.apache.logging.log4j.Logger;
 import server.UserThread;
 import shared.packet.Package;
 
+/**
+ * class allows to communicate
+ */
 public class ClientSendReceive {
 
   private static final Logger LOGGER = LogManager
@@ -22,6 +25,11 @@ public class ClientSendReceive {
   private ObjectOutputStream serverOutputStream;
   private boolean ifConnected = true;
 
+  /**
+   * 
+   * @param socket - Socket
+   * @throws IOException
+   */
   public ClientSendReceive( Socket socket ) throws IOException {
     this.clientSocket = socket;
     this.serverInputStream = new ObjectInputStream(
@@ -33,6 +41,11 @@ public class ClientSendReceive {
     thread.start( );
   }
 
+  /**
+   * send package to client
+   * 
+   * @param packet - data
+   */
   public void sendToClient( Package packet ) {
 
     try {
@@ -43,6 +56,9 @@ public class ClientSendReceive {
     }
   }
 
+  /**
+   * listen from client in order to collect data
+   */
   public void listenFromClient( ) {
 
     Package packet = null;
