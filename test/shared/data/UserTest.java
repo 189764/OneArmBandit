@@ -2,11 +2,18 @@ package shared.data;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import java.util.Random;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Matchers;
 import org.mockito.Mock;
+import org.mockito.Mockito;
+
+import server.Bandit;
 
 public class UserTest {
 
@@ -24,44 +31,62 @@ public class UserTest {
 	@Test
 	public void getStakeTest() {
 		
-		user.setStake(10);
-		when(user.getStake()).thenReturn(10);
-		assertEquals(10, user.getStake());
+		User u = new User(null, null, null, false);
+		u.setStake(10);
+		assertEquals(10, u.getStake());
 	}
 	
 	
 	@Test
 	public void getLoginTest() {
 		
-		user.setLogin("example");
-		when(user.getLogin()).thenReturn("example");
-		assertEquals("example", user.getLogin());
+		User u = new User(null, null, null, false);
+		u.setLogin("example");
+		assertEquals("example", u.getLogin());
 	}
 	
 	
 	@Test
 	public void getPasswordTest() {
 		
-		user.setPassword("password");
-		when(user.getPassword()).thenReturn("password");
-		assertEquals("password", user.getPassword());
+		User u = new User(null, null, null, false);
+		u.setPassword("password");
+		assertEquals("password", u.getPassword());
 	}
 	
 	
 	@Test
 	public void getPointsTest() {
 		
-		user.setPoints(100);
-		when(user.getPoints()).thenReturn(100);
-		assertEquals(100, user.getPoints());
+		User u = new User(null, null, null, false);
+		u.setPoints(100);
+		assertEquals(100, u.getPoints());
 	}
 	
 	
 	@Test
 	public void getIsAdnimTest() {
-		user.setIsAdmin(true);
-		when(user.getIsAdmin()).thenReturn(true);
-		assertEquals(true, user.getIsAdmin());
+		
+		User u = new User(null, null, null, false);
+		u.setIsAdmin(true);
+		assertEquals(true, u.getIsAdmin());
 	}
+	
+	
+	@Test
+	public void setAdnimTest() {
+		
+		User u = new User(null, null, null, false);
+		u.setAdmin(true);
+		assertEquals(true, u.getIsAdmin());
+	}
+	
+//	@Test
+//	public void addPointsTest() {
+//
+//		User a = new User(null, null, null, false);
+//		a.addPoints(10);
+//		when(a.addPoints(10)).thenReturn(10);
+//	}
 
 }
