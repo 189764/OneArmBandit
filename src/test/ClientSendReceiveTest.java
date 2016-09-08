@@ -1,4 +1,4 @@
-package server.networkServer;
+package test;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
@@ -14,6 +14,7 @@ import org.junit.Test;
 
 import client.networkClient.PickUpFromServer;
 import client.networkClient.ServerConnector;
+import server.networkServer.ClientSendReceive;
 
 public class ClientSendReceiveTest {
 	

@@ -1,4 +1,4 @@
-package shared.packet;
+package test;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+
+import shared.packet.Data;
+import shared.packet.Instruction;
 
 
 public class DataTest {

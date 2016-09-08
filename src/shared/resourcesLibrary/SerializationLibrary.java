@@ -159,7 +159,7 @@ public class SerializationLibrary extends AbstractResourcesLibrary {
    * @return path - it returns path (String) - only dirs
    */
 
-  String createSavingPathToDirs( List<String> dirs ) {
+  public String createSavingPathToDirs( List<String> dirs ) {
     String path;
     String [ ] tab = new String [ dirs.size( ) ];
     int i = 0;

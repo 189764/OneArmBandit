@@ -1,4 +1,4 @@
-package client.frames;
+package test;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
@@ -13,6 +13,7 @@ import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
+import client.frames.AdminManagementLogic;
 import client.networkClient.DeliverToServer;
 import server.Bandit;
 import shared.data.User;
