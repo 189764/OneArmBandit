@@ -29,5 +29,17 @@ public class ConnectionConfigurationTest {
 		
 	}
 	
+	@Test
+	 public void getAddressTest() {
+		
+	  assertEquals("127.0.0.1",conf.getAddress());
+	 }
+	 
+	 @Test
+	 public void getPortTest() {
+		 
+	  assertEquals(503,conf.getPort());
+	 }
+	
 
 }
