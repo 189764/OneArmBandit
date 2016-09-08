@@ -1,9 +1,6 @@
 package test;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
 import java.util.ArrayList;
 
 import org.junit.Before;
@@ -16,7 +13,6 @@ import shared.packet.Instruction;
 
 public class DataTest {
 	
-	private static final Object[][] Object = null;
 	@Mock
 	Data data;
 	

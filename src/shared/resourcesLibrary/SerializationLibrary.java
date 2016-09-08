@@ -87,7 +87,7 @@ public class SerializationLibrary extends AbstractResourcesLibrary {
    * This method checks if structure path to saving files contains proper signs.
    */
   @Override
-  protected boolean isSavingStructureProper( String str ) {
+public boolean isSavingStructureProper( String str ) {
     if ( str.contains( "::" ) || str.contains( "//" ) || str.contains( "\\" )
         || str.contains( "*" ) ) {
       return true;
@@ -101,7 +101,7 @@ public class SerializationLibrary extends AbstractResourcesLibrary {
    */
 
   @Override
-  protected boolean isDownloadStructureProper( String str ) {
+public boolean isDownloadStructureProper( String str ) {
     if ( str.contains( "::" ) || str.contains( "//" ) || str.contains( "\\" ) ) {
       return true;
     }

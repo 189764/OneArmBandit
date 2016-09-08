@@ -1,0 +1,6 @@
+<java.util.concurrent.CopyOnWriteArrayList serialization="custom">
+  <java.util.concurrent.CopyOnWriteArrayList>
+    <default/>
+    <int>0</int>
+  </java.util.concurrent.CopyOnWriteArrayList>
+</java.util.concurrent.CopyOnWriteArrayList>

@@ -3,15 +3,10 @@
  */
 package test;
 
-import static org.junit.Assert.*;
-
 import java.io.IOException;
-import java.net.ConnectException;
 import java.net.UnknownHostException;
 
 import org.junit.Test;
-import org.mockito.Matchers;
-import org.mockito.Mockito;
 
 
 public class MainTest {

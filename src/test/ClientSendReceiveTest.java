@@ -7,21 +7,15 @@ import static org.mockito.Mockito.verify;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.net.Socket;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import client.networkClient.PickUpFromServer;
-import client.networkClient.ServerConnector;
 import server.networkServer.ClientSendReceive;
 
 public class ClientSendReceiveTest {
 	
-    private Socket socket;
-    private ClientSendReceive clientSendReceive;
- 
-     @Before
+    @Before
     public void setUp() throws IOException {
         // tego connect nie uzywa wiec moze byc tez zmockowane
         //hfs=mock(PickUpFromServer.class);
@@ -39,6 +33,13 @@ public class ClientSendReceiveTest {
 		OutputStreamWriter osw = new OutputStreamWriter(mock);
 		osw.close();
 		verify(mock).close();
+	}
+	
+	@Test
+	public void isIfConnectedTestNotOk() throws IOException {
+		
+		ClientSendReceive u = mock( ClientSendReceive.class);
+		assertEquals(false, u.isIfConnected());
 	}
 
 }
